@@ -1,52 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Mon compte Tasshilat">
-        <menu>
-            <item
-                android:id="@+id/nav_user_info"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Données personnelles" />
-            <item
-                android:id="@+id/nav_favoris"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Favoris" />
-            <item
-                android:id="@+id/nav_activer_bloquer"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Activer/ Bloquer" />
-            <item
-                android:id="@+id/nav_change_pwd"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Changer mot de passe" />
-        </menu>
-    </item>
+    <group android:checkableBehavior="single">
+        <item android:title="Mon compte Tasshilat">
+            <menu>
+                <item
+                    android:id="@+id/nav_user_info"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Données personnelles" />
+                <item
+                    android:id="@+id/nav_favoris"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Favoris" />
+                <item
+                    android:id="@+id/nav_activer_bloquer"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Activer/ Bloquer" />
+                <item
+                    android:id="@+id/nav_change_pwd"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Changer mot de passe" />
+            </menu>
+        </item>
+    </group>
 
-    <item android:title="Mon Compte de Paiement">
-        <menu>
-            <item
-                android:id="@+id/nav_solde"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Solde" />
-            <item
-                android:id="@+id/nav_depot"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Dépots" />
-            <item
-                android:id="@+id/nav_transfert_payment_account"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Transfert" />
-            <item
-                android:id="@+id/nav_manage_accounts"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Gérer mes comptes" />
-            <item
-                android:id="@+id/nav_history_accounts"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Historiques de mes comptes" />
-        </menu>
-    </item>
-
+    <group android:checkableBehavior="single">
+        <item android:title="Mon Compte de Paiement">
+            <menu>
+                <item
+                    android:id="@+id/nav_solde"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Solde" />
+                <item
+                    android:id="@+id/nav_depot"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Dépots" />
+                <item
+                    android:id="@+id/nav_transfert_payment_account"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Transfert" />
+                <item
+                    android:id="@+id/nav_manage_accounts"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Gérer mes comptes" />
+                <item
+                    android:id="@+id/nav_history_accounts"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Historiques de mes comptes" />
+            </menu>
+        </item>
+    </group>
     <item android:title="Mes services">
         <menu>
             <item
