@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-
 import java.util.List;
 
 import m2t.com.tashilatappprototype.Common.POJO.Account;
@@ -23,13 +21,12 @@ import m2t.com.tashilatappprototype.R;
  * Created by laanaya on 8/11/17.
  */
 
-public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAdapter.MyViewHolder> {
+public class SoldeAdapter extends RecyclerView.Adapter<SoldeAdapter.MyViewHolder> {
 
     private Context mContext;
     private List<Account> accountList;
 
-
-    public AccountPaymentAdapter(Context mContext, List<Account> accountList) {
+    public SoldeAdapter(Context mContext, List<Account> accountList) {
         this.mContext = mContext;
         this.accountList = accountList;
     }
@@ -37,7 +34,7 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.account_card, parent, false);
+                .inflate(R.layout.account_solde_card, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -48,16 +45,17 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
         Account acc = accountList.get(position);
         holder.title.setText(acc.getName());
         holder.count.setText("UAN : " + acc.getUan());
+        holder.solde.setText("Solde : " + acc.getSolde());
 
         // loading acc cover using Glide library
-        Glide.with(mContext).load(acc.getThumbnail()).into(holder.thumbnail);
+        /*Glide.with(mContext).load(acc.getThumbnail()).into(holder.thumbnail);
 
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPopupMenu(holder.overflow);
             }
-        });
+        });*/
     }
 
     /**
@@ -72,7 +70,6 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
         popup.show();
     }
 
-
     /**
      * Click listener for popup menu items
      */
@@ -85,11 +82,10 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.action_add_favourite:
-                    Toast.makeText(mContext, "Ajouter aux favouris", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.action_play_next:
-                    /*Fragment fragment = new ConfigureOperatorFragment();
-                    Utils.replaceFragement(fragment, mContext.getApplicationContext());*/
+                    Toast.makeText(mContext, "Ajouter next", Toast.LENGTH_SHORT).show();
                     return true;
                 default:
             }
@@ -104,14 +100,14 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, count;
-        public ImageView thumbnail, overflow;
+        public TextView title, count, solde;
+        public ImageView overflow;
 
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             count = (TextView) view.findViewById(R.id.count);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            solde = (TextView) view.findViewById(R.id.solde);
             overflow = (ImageView) view.findViewById(R.id.overflow);
         }
     }

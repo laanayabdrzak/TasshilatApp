@@ -19,18 +19,22 @@ import m2t.com.tashilatappprototype.UI.Accueil.AccueilActivity;
 import m2t.com.tashilatappprototype.UI.BillsPayment.BillsPaymentFragment;
 import m2t.com.tashilatappprototype.UI.ChangePwd.ChangePwdFragment;
 import m2t.com.tashilatappprototype.UI.ContactUs.ContactUsFragment;
+import m2t.com.tashilatappprototype.UI.Depot.DepotFragment;
 import m2t.com.tashilatappprototype.UI.FAQ.FAQFragment;
 import m2t.com.tashilatappprototype.UI.Favoris.FavorisFragment;
 import m2t.com.tashilatappprototype.UI.News.NewsFragment;
 import m2t.com.tashilatappprototype.UI.Notifications.NotificationsFragment;
 import m2t.com.tashilatappprototype.UI.Recharge.RechargeFragment;
 import m2t.com.tashilatappprototype.UI.Settings.SettingsActivity;
+import m2t.com.tashilatappprototype.UI.Solde.SoldeFragment;
 import m2t.com.tashilatappprototype.UI.TicketsPayment.TicketsFragment;
+import m2t.com.tashilatappprototype.UI.Transfert.TransfertFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, DrawerLocker {
 
     NavigationView navigationView;
+    DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         invalidateOptionsMenu();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -115,13 +119,13 @@ public class MainActivity extends AppCompatActivity
                 fragment = new ChangePwdFragment();
                 break;
             case R.id.nav_solde:
-
+                fragment = new SoldeFragment();
                 break;
             case R.id.nav_depot:
-
+                fragment = new DepotFragment();
                 break;
             case R.id.nav_transfert_payment_account:
-
+                fragment = new TransfertFragment();
                 break;
             case R.id.nav_manage_accounts:
                 fragment = new AccountPaymentFragment();
@@ -136,7 +140,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new RechargeFragment();
                 break;
             case R.id.nav_transfert:
-
+                fragment = new TransfertFragment();
                 break;
             case R.id.nav_achat_biller:
                 fragment = new TicketsFragment();
@@ -159,9 +163,6 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_notifications:
                 fragment = new NotificationsFragment();
                 break;
-            case R.id.nav_settings:
-
-                break;
         }
         Utils.replaceFragement(fragment, MainActivity.this);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -178,4 +179,19 @@ public class MainActivity extends AppCompatActivity
         nav_Menu.findItem(R.id.nav_change_pwd).setVisible(false);
         nav_Menu.findItem(R.id.nav_activer_bloquer).setVisible(false);
     }
+
+    @Override
+    public void setDrawerLocked(boolean shouldLock) {
+        if(shouldLock){
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }else{
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        }
+    }
+
+
+}
+
+interface DrawerLocker{
+    public void setDrawerLocked(boolean shouldLock);
 }

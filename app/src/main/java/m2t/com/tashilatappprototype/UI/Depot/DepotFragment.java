@@ -1,4 +1,4 @@
-package m2t.com.tashilatappprototype.UI.Favoris;
+package m2t.com.tashilatappprototype.UI.Depot;
 
 
 import android.app.Fragment;
@@ -12,10 +12,10 @@ import m2t.com.tashilatappprototype.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavorisFragment extends Fragment {
+public class DepotFragment extends Fragment {
 
 
-    public FavorisFragment() {
+    public DepotFragment() {
         // Required empty public constructor
     }
 
@@ -23,8 +23,7 @@ public class FavorisFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.fragment_favoris, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_depot, container, false);
 
         return rootView;
     }

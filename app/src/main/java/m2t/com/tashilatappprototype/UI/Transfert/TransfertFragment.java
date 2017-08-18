@@ -1,4 +1,4 @@
-package m2t.com.tashilatappprototype.UI.Recharge;
+package m2t.com.tashilatappprototype.UI.Transfert;
 
 
 import android.app.Fragment;
@@ -23,23 +23,24 @@ import m2t.com.tashilatappprototype.UI.MainActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RechargeFragment extends Fragment {
-
+public class TransfertFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private AccountPaymentAdapter adapter;
 
     private List<Account> accountsList;
 
-    public RechargeFragment() {
-        // Required empty public constructor
+
+    public TransfertFragment() {
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_recharge, container, false);
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_transfert, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().show();
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
@@ -53,19 +54,38 @@ public class RechargeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         prepareAccounts();
+
         return rootView;
     }
 
     /**
-     * Adding few albums for testing
+     * Adding few accounts for testing
      */
     private void prepareAccounts() {
         int[] covers = new int[]{
-                R.drawable.b0007
-                };
+                R.drawable.b0004,
+                R.drawable.b0031,
+                R.drawable.b0033,
+                R.drawable.b0036,
+                R.drawable.b0045
+        };
 
-        Account a = new Account("IAM", 1332333214, covers[0]);
+        Account a = new Account("Amanty PFG", 1332333214, covers[0]);
         accountsList.add(a);
+
+        a = new Account("amanty web", 1332333214, covers[1]);
+        accountsList.add(a);
+
+        a = new Account("proxicash", 1332333214, covers[2]);
+        accountsList.add(a);
+
+        a = new Account("wcash", 1332333214, covers[3]);
+        accountsList.add(a);
+
+        a = new Account("Salafin", 1332333214, covers[4]);
+        accountsList.add(a);
+
+
 
         adapter.notifyDataSetChanged();
     }

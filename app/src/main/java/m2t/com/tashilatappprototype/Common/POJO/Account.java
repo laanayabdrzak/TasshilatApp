@@ -9,6 +9,7 @@ public class Account {
     private String name;
     private int uan;
     private int thumbnail;
+    private float solde;
 
     public Account() {
     }
@@ -17,6 +18,20 @@ public class Account {
         this.name = name;
         this.uan = uan;
         this.thumbnail = thumbnail;
+    }
+
+    public Account(String name, int uan, float solde) {
+        this.name = name;
+        this.uan = uan;
+        this.solde = solde;
+    }
+
+    public float getSolde() {
+        return solde;
+    }
+
+    public void setSolde(float solde) {
+        this.solde = solde;
     }
 
     public String getName() {
