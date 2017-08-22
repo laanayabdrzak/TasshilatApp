@@ -27,7 +27,8 @@ import m2t.com.tashilatappprototype.Common.POJO.Favourite;
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.UI.MainActivity;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment
+		implements InvoiceAdapter.OnCardClickListner, FavouriteAdapter.OnCardClickListner {
 
 	private RecyclerView listView, collectionView;
 	private PieChart mChart;
@@ -70,14 +71,15 @@ public class HomeFragment extends Fragment {
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		List<Favourite> favouriteItems = new ArrayList();
-		favouriteItems.add(new Favourite("", R.drawable.b0001));
-		favouriteItems.add(new Favourite("", R.drawable.b0002));
-		favouriteItems.add(new Favourite("", R.drawable.b0004));
-		favouriteItems.add(new Favourite("", R.drawable.b0006));
-		favouriteItems.add(new Favourite("", R.drawable.b0007));
+		favouriteItems.add(new Favourite("Lydec", R.drawable.b0001));
+		favouriteItems.add(new Favourite("Redal", R.drawable.b0002));
+		favouriteItems.add(new Favourite("Amanty", R.drawable.b0004));
+		favouriteItems.add(new Favourite("CTM", R.drawable.b0006));
+		favouriteItems.add(new Favourite("IAM", R.drawable.b0007));
 
 		FavouriteAdapter favouriteAdapter = new FavouriteAdapter(getActivity(), favouriteItems);
-		final GridLayoutManager glm = new GridLayoutManager(getActivity(), 2);
+		favouriteAdapter.setOnCardClickListner(this);
+		final GridLayoutManager glm = new GridLayoutManager(getActivity(), 3);
 		glm.setOrientation(LinearLayoutManager.VERTICAL);
 		collectionView.setLayoutManager(glm);
 		collectionView.setAdapter(favouriteAdapter);
@@ -86,13 +88,13 @@ public class HomeFragment extends Fragment {
 		for (int i = 0; i < 6; i++)
 			invoiceItems.add("");
 		InvoiceAdapter invoiceAdapter = new InvoiceAdapter(getActivity(), invoiceItems);
+		invoiceAdapter.setOnCardClickListner(this);
 		final LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 		listView.setLayoutManager(llm);
 		listView.setAdapter(invoiceAdapter);
 	}
 
 	protected PieData generatePieData() {
-
 		int count = 4;
 		ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
 
@@ -109,5 +111,10 @@ public class HomeFragment extends Fragment {
 
 		PieData d = new PieData(ds1);
 		return d;
+	}
+
+	@Override
+	public void OnCardClicked(View view, int position) {
+
 	}
 }
