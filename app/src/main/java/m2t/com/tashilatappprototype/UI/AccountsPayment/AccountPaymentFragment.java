@@ -16,6 +16,7 @@ import java.util.List;
 import m2t.com.tashilatappprototype.Adapter.AccountPaymentAdapter;
 import m2t.com.tashilatappprototype.Common.POJO.Account;
 import m2t.com.tashilatappprototype.R;
+import m2t.com.tashilatappprototype.UI.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +36,7 @@ public class AccountPaymentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_account_payment, container, false);
-
+        ((MainActivity) getActivity()).setActionBarTitle(R.string.gerer_comptes_title);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         accountsList = new ArrayList<>();

@@ -25,6 +25,7 @@ import m2t.com.tashilatappprototype.Adapter.FavouriteAdapter;
 import m2t.com.tashilatappprototype.Adapter.InvoiceAdapter;
 import m2t.com.tashilatappprototype.Common.POJO.Favourite;
 import m2t.com.tashilatappprototype.R;
+import m2t.com.tashilatappprototype.UI.MainActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -40,6 +41,7 @@ public class HomeFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_home, container, false);
 
+        ((MainActivity) getActivity()).setActionBarTitle(R.string.accueil_title);
 		listView = (RecyclerView) v.findViewById(R.id.list_view);
 		collectionView = (RecyclerView) v.findViewById(R.id.collection_view);
 

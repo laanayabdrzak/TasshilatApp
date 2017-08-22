@@ -6,14 +6,16 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
-import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.Common.utils.Utils;
+import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.UI.AccountsPayment.AccountPaymentFragment;
 import m2t.com.tashilatappprototype.UI.Accueil.AccueilActivity;
 import m2t.com.tashilatappprototype.UI.BillsPayment.BillsPaymentFragment;
@@ -36,13 +38,21 @@ public class MainActivity extends AppCompatActivity
 
 	NavigationView navigationView;
 	DrawerLayout drawer;
+	TextView toolbarTitle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		toolbar.setTitle("Tasshilat");
+        setSupportActionBar(toolbar);
+
+        toolbar.setTitle("");
+        toolbar.setSubtitle("");
+        toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+
+
+
 		setSupportActionBar(toolbar);
 		invalidateOptionsMenu();
 
@@ -191,6 +201,20 @@ public class MainActivity extends AppCompatActivity
 		}
 	}
 
+    public void setActionBarTitle(int id) {
+        getSupportActionBar().setTitle(id);
+        final ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            //actionBar.setHomeAsUpIndicator(R.drawable.ic_add_account_black_24dp);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayShowCustomEnabled(true);
+
+            toolbarTitle.setText(getResources().getString(id));
+
+        }
+    }
 }
 
 interface DrawerLocker {

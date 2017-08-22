@@ -30,7 +30,7 @@ public class BillsPaymentFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private AccountPaymentAdapter adapter;
-
+    private Fragment fragment;
     private List<Account> accountsList;
 
     public BillsPaymentFragment() {
@@ -43,6 +43,7 @@ public class BillsPaymentFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_bills_payment, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().show();
+        ((MainActivity) getActivity()).setActionBarTitle(R.string.paiemnt_fac_title);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         accountsList = new ArrayList<>();
@@ -63,8 +64,10 @@ public class BillsPaymentFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Toast.makeText(getActivity(), "onCLick", Toast.LENGTH_LONG).show();
-
-                Utils.replaceFragement(new ConfigureOperatorFragment(), getActivity());
+                fragment = new ConfigureOperatorFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("logo_operator","");
+                Utils.replaceFragement(fragment, getActivity());
             }
 
             @Override

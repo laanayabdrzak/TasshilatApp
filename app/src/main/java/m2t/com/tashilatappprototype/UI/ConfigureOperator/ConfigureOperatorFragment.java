@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Switch;
 
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.UI.MainActivity;
@@ -15,6 +17,7 @@ import m2t.com.tashilatappprototype.UI.MainActivity;
  */
 public class ConfigureOperatorFragment extends Fragment {
 
+    private ImageView imgOperator;
 
 
     public ConfigureOperatorFragment() {
@@ -28,6 +31,11 @@ public class ConfigureOperatorFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_configure_operator, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().hide();
         ((MainActivity) getActivity()).setDrawerLocked(true);
+        imgOperator = (ImageView) rootView.findViewById(R.id.img_operator);
+        Switch simpleSwitch = (Switch) rootView.findViewById(R.id.simpleSwitch); // initiate Switch
+
+        simpleSwitch.setTextOn("On"); // displayed text of the Switch whenever it is in checked or on state
+        simpleSwitch.setTextOff("Off"); // displayed text of the Switch whenever it is in unchecked i.e. off state
 
 
         return rootView;
