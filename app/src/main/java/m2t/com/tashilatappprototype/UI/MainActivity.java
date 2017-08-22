@@ -22,6 +22,7 @@ import m2t.com.tashilatappprototype.UI.ContactUs.ContactUsFragment;
 import m2t.com.tashilatappprototype.UI.Depot.DepotFragment;
 import m2t.com.tashilatappprototype.UI.FAQ.FAQFragment;
 import m2t.com.tashilatappprototype.UI.Favoris.FavorisFragment;
+import m2t.com.tashilatappprototype.UI.History.HistoryFragment;
 import m2t.com.tashilatappprototype.UI.Home.HomeFragment;
 import m2t.com.tashilatappprototype.UI.News.NewsFragment;
 import m2t.com.tashilatappprototype.UI.Notifications.NotificationsFragment;
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity
 			fragment = new AccountPaymentFragment();
 			break;
 		case R.id.nav_history_accounts:
-
+			fragment = new HistoryFragment();
 			break;
 		case R.id.nav_payment_bills:
 			fragment = new BillsPaymentFragment();
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity
 
 			break;
 		case R.id.nav_history_transaction:
-
+			fragment = new HistoryFragment();
 			break;
 		case R.id.nav_news:
 			fragment = new NewsFragment();
