@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
-import m2t.com.tashilatappprototype.Common.POJO.Favourite;
+import m2t.com.tashilatappprototype.Common.POJO.Invoice;
 import m2t.com.tashilatappprototype.R;
 
 public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHolder> {
@@ -16,17 +18,24 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
 	private Context context;
 
 	public static class ViewHolder extends RecyclerView.ViewHolder {
+		TextView ref, amount, status, date;
+		ImageView icon;
 
 		ViewHolder(View itemView) {
 			super(itemView);
+			ref = (TextView) itemView.findViewById(R.id.ref);
+			amount = (TextView) itemView.findViewById(R.id.amount);
+			status = (TextView) itemView.findViewById(R.id.status);
+			date = (TextView) itemView.findViewById(R.id.date);
+			icon = (ImageView) itemView.findViewById(R.id.icon);
 		}
 
 	}
 
-	List<?> items;
+	List<Invoice> items;
 	OnCardClickListner onCardClickListner;
 
-	public InvoiceAdapter(Context ctx, List<Favourite> items) {
+	public InvoiceAdapter(Context ctx, List<Invoice> items) {
 		this.items = items;
 		context = ctx;
 	}
@@ -45,7 +54,11 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
 
 	@Override
 	public void onBindViewHolder(ViewHolder holder, final int position) {
-
+		holder.ref.setText(items.get(position).getRef());
+		holder.amount.setText(items.get(position).getAmount());
+		holder.status.setText(items.get(position).getStatus());
+		holder.date.setText(items.get(position).getDate());
+		holder.icon.setImageResource(items.get(position).getIcon());
 	}
 
 	@Override

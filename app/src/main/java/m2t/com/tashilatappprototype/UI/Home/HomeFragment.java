@@ -24,6 +24,7 @@ import java.util.List;
 import m2t.com.tashilatappprototype.Adapter.FavouriteAdapter;
 import m2t.com.tashilatappprototype.Adapter.InvoiceAdapter;
 import m2t.com.tashilatappprototype.Common.POJO.Favourite;
+import m2t.com.tashilatappprototype.Common.POJO.Invoice;
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.UI.MainActivity;
 
@@ -84,9 +85,12 @@ public class HomeFragment extends Fragment
 		collectionView.setLayoutManager(glm);
 		collectionView.setAdapter(favouriteAdapter);
 
-		List invoiceItems = new ArrayList();
-		for (int i = 0; i < 6; i++)
-			invoiceItems.add("");
+		List<Invoice> invoiceItems = new ArrayList();
+		invoiceItems.add(new Invoice("N° 21344452", "231,55 Dhs", "Payé", "13 Aout 2017 13h05", R.drawable.b0006));
+		invoiceItems.add(new Invoice("N° 54665444", "60,65 Dhs", "Payé", "13 Aout 2017 13h05", R.drawable.b0011));
+		invoiceItems.add(new Invoice("N° 09554332", "342,09 Dhs", "Payé", "29 Juin 2017 12h33", R.drawable.b0007));
+		invoiceItems.add(new Invoice("N° 33456666", "603,12 Dhs", "Payé", "13 Aout 2017 22h57", R.drawable.b0004));
+		invoiceItems.add(new Invoice("N° 12322111", "14,06 Dhs", "Payé", "13 Aout 2017 09h11", R.drawable.b0009));
 		InvoiceAdapter invoiceAdapter = new InvoiceAdapter(getActivity(), invoiceItems);
 		invoiceAdapter.setOnCardClickListner(this);
 		final LinearLayoutManager llm = new LinearLayoutManager(getActivity());
