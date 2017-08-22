@@ -42,6 +42,7 @@ public class TransfertFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_transfert, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().show();
+        ((MainActivity) getActivity()).setActionBarTitle(R.string.transfert_title);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         accountsList = new ArrayList<>();

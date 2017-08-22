@@ -41,6 +41,7 @@ public class RechargeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recharge, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().show();
+        ((MainActivity) getActivity()).setActionBarTitle(R.string.recharge_title);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         accountsList = new ArrayList<>();

@@ -15,6 +15,20 @@
 
     <string name="hello_blank_fragment">HELOOO</string>
 
+    <!-- title Fragments -->
+    <string name="accueil_title">Accueil</string>
+    <string name="solde_title">Solde</string>
+    <string name="depot_title">Dépots</string>
+    <string name="gerer_comptes_title">Mes comptes de paiement</string>
+    <string name="histo_comptes_title">Hitoriques de mes comptes</string>
+    <string name="paiemnt_fac_title">Paiement factures</string>
+    <string name="recharge_title">Recharge</string>
+    <string name="transfert_title">Transfert d\'argent</string>
+    <string name="achat_ticket_billet_title">Achat ticket/billet</string>
+    <string name="paiemnt_commercant_title">Paiement commerçant</string>
+    <string name="histo_trans_title">Historiques des transactions</string>
+    <string name="news_title">News</string>
+
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>

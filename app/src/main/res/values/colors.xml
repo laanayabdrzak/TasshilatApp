@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#E43F3F</color>
-    <color name="color_primary_dark">#E12929</color>
-    <color name="primary_darker">#CC1D1D</color>
-    <color name="color_accent">#FFFFFF</color>
+    <color name="color_primary">#FF9800</color>
+    <color name="color_primary_dark">#FB8C00</color>
+    <color name="primary_darker">#EF6C00</color>
+    <color name="color_accent">#FFE0B2</color>
     <color name="account_title">#4c4c4c</color>
     <color name="black">#000000</color>
     <color name="jet">#222222</color>
