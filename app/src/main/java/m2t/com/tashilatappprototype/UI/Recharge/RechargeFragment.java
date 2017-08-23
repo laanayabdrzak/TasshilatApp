@@ -40,7 +40,7 @@ public class RechargeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recharge, container, false);
-        ((MainActivity) getActivity()).getSupportActionBar().show();
+        ((MainActivity) getActivity()).enableViews(false);
         ((MainActivity) getActivity()).setActionBarTitle(R.string.recharge_title);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 

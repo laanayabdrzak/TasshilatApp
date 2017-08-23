@@ -29,8 +29,8 @@ public class ConfigureOperatorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_configure_operator, container, false);
-        ((MainActivity) getActivity()).getSupportActionBar().hide();
-        ((MainActivity) getActivity()).setDrawerLocked(true);
+        ((MainActivity) getActivity()).enableViews(true);
+
         imgOperator = (ImageView) rootView.findViewById(R.id.img_operator);
         Switch simpleSwitch = (Switch) rootView.findViewById(R.id.simpleSwitch); // initiate Switch
 

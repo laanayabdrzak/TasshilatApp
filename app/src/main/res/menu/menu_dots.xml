@@ -11,4 +11,16 @@
         android:id="@+id/action_play_next"
         android:orderInCategory="101"
         android:title="@string/configure_operator" />
+    <item
+        android:id="@+id/action_paid_biller"
+        android:orderInCategory="102"
+        android:title="@string/menu_biller" />
+    <item
+        android:id="@+id/action_recharge"
+        android:orderInCategory="103"
+        android:title="@string/menu_recharge" />
+    <item
+        android:id="@+id/action_achat_ticket"
+        android:orderInCategory="104"
+        android:title="@string/menu_achat_ticket" />
 </menu>

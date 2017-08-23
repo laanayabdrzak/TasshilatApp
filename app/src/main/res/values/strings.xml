@@ -11,7 +11,10 @@
     <string name="sign_up">S\'inscrire</string>
 
     <string name="add_to_favourite">Ajouter aux favouris</string>
-    <string name="configure_operator"> Configurer operateur</string>
+    <string name="configure_operator">Configurer operateur</string>
+    <string name="menu_recharge">Recharge</string>
+    <string name="menu_biller">Paiement facture</string>
+    <string name="menu_achat_ticket">Achat ticket/billet</string>
 
     <string name="hello_blank_fragment">HELOOO</string>
 
@@ -19,6 +22,7 @@
     <string name="accueil_title">Accueil</string>
     <string name="solde_title">Solde</string>
     <string name="depot_title">Dépots</string>
+    <string name="conf_oper_title">Configurer Operateur</string>
     <string name="gerer_comptes_title">Mes comptes de paiement</string>
     <string name="histo_comptes_title">Hitoriques de mes comptes</string>
     <string name="paiemnt_fac_title">Paiement factures</string>

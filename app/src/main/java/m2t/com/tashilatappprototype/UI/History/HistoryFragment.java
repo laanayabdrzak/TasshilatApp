@@ -27,6 +27,7 @@ import m2t.com.tashilatappprototype.Common.utils.DayAxisValueFormatter;
 import m2t.com.tashilatappprototype.Common.utils.MyAxisValueFormatter;
 import m2t.com.tashilatappprototype.Common.utils.XYMarkerView;
 import m2t.com.tashilatappprototype.R;
+import m2t.com.tashilatappprototype.UI.MainActivity;
 
 public class HistoryFragment extends Fragment {
 
@@ -41,7 +42,8 @@ public class HistoryFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_history, container, false);
-
+		((MainActivity) getActivity()).enableViews(false);
+		((MainActivity) getActivity()).setActionBarTitle(R.string.histo_comptes_title);
 		rv = (RecyclerView) v.findViewById(R.id.rv);
 
 		mChart = (BarChart) v.findViewById(R.id.chart1);
