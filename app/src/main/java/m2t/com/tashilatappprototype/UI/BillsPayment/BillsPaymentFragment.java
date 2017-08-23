@@ -42,7 +42,7 @@ public class BillsPaymentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_bills_payment, container, false);
-        ((MainActivity) getActivity()).getSupportActionBar().show();
+        ((MainActivity) getActivity()).enableViews(false);
         ((MainActivity) getActivity()).setActionBarTitle(R.string.paiemnt_fac_title);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 

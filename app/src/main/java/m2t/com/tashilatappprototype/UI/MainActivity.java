@@ -2,6 +2,8 @@ package m2t.com.tashilatappprototype.UI;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import m2t.com.tashilatappprototype.Common.utils.Utils;
@@ -37,9 +40,32 @@ import m2t.com.tashilatappprototype.UI.Transfert.TransfertFragment;
 public class MainActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener, DrawerLocker {
 
+    ActionBarDrawerToggle toggle;
 	NavigationView navigationView;
 	DrawerLayout drawer;
 	TextView toolbarTitle;
+    private boolean mToolBarNavigationListenerIsRegistered = false;
+    //Setting default colors for menu item Text and Icon
+    int navDefaultTextColor = Color.parseColor("#EF6C00");
+
+
+    //Defining ColorStateList for menu item Text
+    ColorStateList navMenuTextList = new ColorStateList(
+            new int[][]{
+                    new int[]{android.R.attr.state_checked},
+                    new int[]{android.R.attr.state_enabled},
+                    new int[]{android.R.attr.state_pressed},
+                    new int[]{android.R.attr.state_focused},
+                    new int[]{android.R.attr.state_pressed}
+            },
+            new int[] {
+                    R.color.primary_darker,
+                    navDefaultTextColor,
+                    navDefaultTextColor,
+                    navDefaultTextColor,
+                    navDefaultTextColor
+            }
+    );
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +79,18 @@ public class MainActivity extends AppCompatActivity
         toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
 
 
-
 		setSupportActionBar(toolbar);
 		invalidateOptionsMenu();
 
 		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open,
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open,
 				R.string.navigation_drawer_close);
-		drawer.setDrawerListener(toggle);
-		toggle.syncState();
+        // Setting the actionbarToggle to drawer layout
+        drawer.setDrawerListener(toggle);
+        // Calling sync state is necessary to show your hamburger icon...
+        // or so I hear. Doesn't hurt including it even if you find it works
+        // without it on your test device(s)
+        toggle.syncState();
 
 		getFragmentManager().beginTransaction().replace(R.id.frame_container, new HomeFragment()).commit();
 
@@ -125,6 +154,7 @@ public class MainActivity extends AppCompatActivity
 			break;
 		case R.id.nav_favoris:
 			fragment = new FavorisFragment();
+            navigationView.setItemTextColor(navMenuTextList);
 			break;
 		case R.id.nav_activer_bloquer:
 
@@ -149,6 +179,7 @@ public class MainActivity extends AppCompatActivity
 			break;
 		case R.id.nav_payment_bills:
 			fragment = new BillsPaymentFragment();
+            navigationView.setItemTextColor(navMenuTextList);
 			break;
 		case R.id.nav_recharge:
 			fragment = new RechargeFragment();
@@ -202,7 +233,78 @@ public class MainActivity extends AppCompatActivity
 		}
 	}
 
+
+    /**
+     * To be semantically or contextually correct, maybe change the name
+     * and signature of this function to something like:
+     *
+     * private void showBackButton(boolean show)
+     * Just a suggestion.
+     */
+    public void enableViews(boolean enable) {
+
+        // To keep states of ActionBar and ActionBarDrawerToggle synchronized,
+        // when you enable on one, you disable on the other.
+        // And as you may notice, the order for this operation is disable first, then enable - VERY VERY IMPORTANT.
+        if(enable) {
+            // Remove hamburger
+            toggle.setDrawerIndicatorEnabled(false);
+            // Show back button
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            this.setDrawerLocked(true);
+            // when DrawerToggle is disabled i.e. setDrawerIndicatorEnabled(false), navigation icon
+            // clicks are disabled i.e. the UP button will not work.
+            // We need to add a listener, as in below, so DrawerToggle will forward
+            // click events to this listener.
+            if(!mToolBarNavigationListenerIsRegistered) {
+                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Doesn't have to be onBackPressed
+                        onBackPressed();
+                    }
+                });
+
+                mToolBarNavigationListenerIsRegistered = true;
+            }
+
+        } else {
+            // Remove back button
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            // Show hamburger
+            toggle.setDrawerIndicatorEnabled(true);
+            // Remove the/any drawer toggle listener
+            toggle.setToolbarNavigationClickListener(null);
+            mToolBarNavigationListenerIsRegistered = false;
+        }
+
+        // So, one may think "Hmm why not simplify to:
+        // .....
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(enable);
+        // mDrawer.setDrawerIndicatorEnabled(!enable);
+        // ......
+        // To re-iterate, the order in which you enable and disable views IS important #dontSimplify.
+    }
+
     public void setActionBarTitle(int id) {
+        getSupportActionBar().setTitle(id);
+        final ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            //actionBar.setHomeAsUpIndicator(R.drawable.ic_add_account_black_24dp);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayShowCustomEnabled(true);
+
+            toolbarTitle.setText(getResources().getString(id));
+
+        }
+    }
+
+    public void setHiddenDrawerIndicator (int id){
+        toggle.setDrawerIndicatorEnabled(false);
+
+        this.setDrawerLocked(true);
         getSupportActionBar().setTitle(id);
         final ActionBar actionBar = getSupportActionBar();
 

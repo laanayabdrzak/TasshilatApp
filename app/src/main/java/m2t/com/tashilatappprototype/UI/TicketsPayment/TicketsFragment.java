@@ -40,7 +40,7 @@ public class TicketsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tickets, container, false);
-        ((MainActivity) getActivity()).getSupportActionBar().show();
+        ((MainActivity) getActivity()).enableViews(false);
         ((MainActivity) getActivity()).setActionBarTitle(R.string.achat_ticket_billet_title);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 

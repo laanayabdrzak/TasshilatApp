@@ -1,5 +1,6 @@
 package m2t.com.tashilatappprototype.Adapter;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +18,9 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import m2t.com.tashilatappprototype.Common.POJO.Account;
+import m2t.com.tashilatappprototype.Common.utils.Utils;
 import m2t.com.tashilatappprototype.R;
+import m2t.com.tashilatappprototype.UI.ConfigureOperator.ConfigureOperatorFragment;
 
 /**
  * Created by laanaya on 8/11/17.
@@ -83,13 +86,26 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
 
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
+            Fragment fragment = null;
             switch (menuItem.getItemId()) {
                 case R.id.action_add_favourite:
                     Toast.makeText(mContext, "Ajouter aux favouris", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.action_play_next:
-                    /*Fragment fragment = new ConfigureOperatorFragment();
-                    Utils.replaceFragement(fragment, mContext.getApplicationContext());*/
+                    fragment = new ConfigureOperatorFragment();
+                    Utils.replaceFragementFromContext(fragment, mContext);
+                    return true;
+                case R.id.action_paid_biller:
+                    fragment = new ConfigureOperatorFragment();
+                    Utils.replaceFragementFromContext(fragment, mContext);
+                    return true;
+                case R.id.action_recharge:
+                    fragment = new ConfigureOperatorFragment();
+                    Utils.replaceFragementFromContext(fragment, mContext);
+                    return true;
+                case R.id.action_achat_ticket:
+                    fragment = new ConfigureOperatorFragment();
+                    Utils.replaceFragementFromContext(fragment, mContext);
                     return true;
                 default:
             }

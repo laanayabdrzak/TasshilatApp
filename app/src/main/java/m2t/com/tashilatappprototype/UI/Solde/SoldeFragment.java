@@ -37,7 +37,7 @@ public class SoldeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_solde, container, false);
-        ((MainActivity) getActivity()).getSupportActionBar().show();
+        ((MainActivity) getActivity()).enableViews(false);
         ((MainActivity) getActivity()).setActionBarTitle(R.string.solde_title);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
@@ -64,15 +64,16 @@ public class SoldeFragment extends Fragment {
         int[] covers = new int[]{
                 R.drawable.cihbank,
                 R.drawable.cihbank,
-                R.drawable.citibank};
+                R.drawable.citibank
+        };
 
-        Account a = new Account("BMCE BANK", 1332333214, 12313133f);
+        Account a = new Account("Compte 1", 1332333214, 12313133f);
         accountsList.add(a);
 
-        a = new Account("CIH BANK", 1332333214, 12.33f);
+        a = new Account("Compte 2", 1332333214, 12.33f);
         accountsList.add(a);
 
-        a = new Account("Citi BANK", 1332333214, 12121.43f);
+        a = new Account("Compte 3", 1332333214, 12121.43f);
         accountsList.add(a);
 
 
