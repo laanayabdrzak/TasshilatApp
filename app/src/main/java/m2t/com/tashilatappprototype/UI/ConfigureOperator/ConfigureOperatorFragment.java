@@ -30,13 +30,12 @@ public class ConfigureOperatorFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_configure_operator, container, false);
         ((MainActivity) getActivity()).enableViews(true);
-
+        ((MainActivity) getActivity()).setActionBarTitle(R.string.conf_oper_title);
         imgOperator = (ImageView) rootView.findViewById(R.id.img_operator);
         Switch simpleSwitch = (Switch) rootView.findViewById(R.id.simpleSwitch); // initiate Switch
 
         simpleSwitch.setTextOn("On"); // displayed text of the Switch whenever it is in checked or on state
         simpleSwitch.setTextOff("Off"); // displayed text of the Switch whenever it is in unchecked i.e. off state
-
 
         return rootView;
     }

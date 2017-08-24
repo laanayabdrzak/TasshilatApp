@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_home, container, false);
-
+		((MainActivity) getActivity()).enableViews(false);
         ((MainActivity) getActivity()).setActionBarTitle(R.string.accueil_title);
 		listView = (RecyclerView) v.findViewById(R.id.list_view);
 		collectionView = (RecyclerView) v.findViewById(R.id.collection_view);
