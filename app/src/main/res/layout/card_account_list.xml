@@ -4,13 +4,13 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/iron"
         android:layout_marginTop="0.5dp"
         android:layout_marginBottom="0.5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
         <View
             android:id="@+id/side_status"
             android:layout_width="15dp"
@@ -33,22 +33,12 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/ref"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/ref_account"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/black"
                         android:text="N°21334332"
-                        android:textSize="16dp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="11 aout 2012"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/darker_gray"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="12dp"/>
 
                 </LinearLayout>
 
@@ -70,21 +60,14 @@
 
                     <TextView
                         android:id="@+id/status"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textCapWords"
+                        android:gravity="right"
                         android:text="Payé"
                         android:textColor="@android:color/holo_green_dark"
-                        android:textSize="20sp"
-                        android:textStyle="bold|italic"/>
-                    <TextView
-                        android:id="@+id/amount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="213,43 DHs"
-                        android:textColor="@color/color_primary"
                         android:textSize="16sp"
-                        android:textStyle="italic"/>
+                        android:textStyle="bold|italic" />
 
                 </LinearLayout>
             </LinearLayout>

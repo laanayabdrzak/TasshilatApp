@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -22,17 +23,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import m2t.com.tashilatappprototype.Adapter.FavouriteAdapter;
+import m2t.com.tashilatappprototype.Adapter.HomeAccountAdapter;
 import m2t.com.tashilatappprototype.Adapter.InvoiceAdapter;
+import m2t.com.tashilatappprototype.Common.POJO.Account;
 import m2t.com.tashilatappprototype.Common.POJO.Favourite;
 import m2t.com.tashilatappprototype.Common.POJO.Invoice;
 import m2t.com.tashilatappprototype.R;
+import m2t.com.tashilatappprototype.UI.ConfigureOperator.ConfigureOperatorFragment;
 import m2t.com.tashilatappprototype.UI.MainActivity;
 
 public class HomeFragment extends Fragment
 		implements InvoiceAdapter.OnCardClickListner, FavouriteAdapter.OnCardClickListner {
 
-	private RecyclerView listView, collectionView;
+	private RecyclerView listView, listviewCompte, collectionView;
 	private PieChart mChart;
+    private List<Favourite> favouriteItems;
 
 	public HomeFragment() {
 		super();
@@ -44,7 +49,9 @@ public class HomeFragment extends Fragment
 		View v = inflater.inflate(R.layout.fragment_home, container, false);
 		((MainActivity) getActivity()).enableViews(false);
         ((MainActivity) getActivity()).setActionBarTitle(R.string.accueil_title);
+
 		listView = (RecyclerView) v.findViewById(R.id.list_view);
+		listviewCompte = (RecyclerView) v.findViewById(R.id.list_view_compte);
 		collectionView = (RecyclerView) v.findViewById(R.id.collection_view);
 
 		mChart = (PieChart) v.findViewById(R.id.piechart);
@@ -71,16 +78,17 @@ public class HomeFragment extends Fragment
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		List<Favourite> favouriteItems = new ArrayList();
+        favouriteItems = new ArrayList();
 		favouriteItems.add(new Favourite("Lydec", R.drawable.b0001));
 		favouriteItems.add(new Favourite("Redal", R.drawable.b0002));
 		favouriteItems.add(new Favourite("Amanty", R.drawable.b0004));
 		favouriteItems.add(new Favourite("CTM", R.drawable.b0006));
 		favouriteItems.add(new Favourite("IAM", R.drawable.b0007));
+		favouriteItems.add(new Favourite("IAM", R.drawable.b0007));
 
 		FavouriteAdapter favouriteAdapter = new FavouriteAdapter(getActivity(), favouriteItems);
 		favouriteAdapter.setOnCardClickListner(this);
-		final GridLayoutManager glm = new GridLayoutManager(getActivity(), 3);
+		final GridLayoutManager glm = new GridLayoutManager(getActivity(), 6);
 		glm.setOrientation(LinearLayoutManager.VERTICAL);
 		collectionView.setLayoutManager(glm);
 		collectionView.setAdapter(favouriteAdapter);
@@ -96,11 +104,36 @@ public class HomeFragment extends Fragment
 		final LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 		listView.setLayoutManager(llm);
 		listView.setAdapter(invoiceAdapter);
+
+        List<Account> accItems = new ArrayList<>();
+
+        Account a ;
+
+        a = new Account();
+        a.setUan(000000122);
+        a.setSolde(121.2121f);
+        accItems.add(a);
+
+        a = new Account();
+        a.setUan(000000132);
+        a.setSolde(331.2121f);
+        accItems.add(a);
+
+        a = new Account();
+        a.setUan(000000135);
+        a.setSolde(631.2121f);
+        accItems.add(a);
+
+
+        HomeAccountAdapter accAdapter = new HomeAccountAdapter(getActivity(), accItems);
+		final LinearLayoutManager llmC = new LinearLayoutManager(getActivity());
+		listviewCompte.setLayoutManager(llmC);
+		listviewCompte.setAdapter(accAdapter);
 	}
 
 	protected PieData generatePieData() {
 		int count = 4;
-		ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+		ArrayList<PieEntry> entries = new ArrayList<>();
 
 		entries.add(new PieEntry(20, "Lydec"));
 		entries.add(new PieEntry(30, "Orange"));
@@ -119,6 +152,17 @@ public class HomeFragment extends Fragment
 
 	@Override
 	public void OnCardClicked(View view, int position) {
+		if (view.getParent() == collectionView) {
+            int itemPosition = collectionView.getChildLayoutPosition(view);
+            Favourite item = favouriteItems.get(itemPosition);
 
+            Fragment fragment = new ConfigureOperatorFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("logo_operator",String.valueOf(item.getIcon()));
+            bundle.putString("title_operator",item.getTitle());
+            fragment.setArguments(bundle);
+			getFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
+					.commit();
+		}
 	}
 }

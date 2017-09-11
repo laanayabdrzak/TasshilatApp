@@ -80,7 +80,7 @@ public class SignInActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(SignInActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
+        progressDialog.setMessage("S'authentifier...");
         progressDialog.show();
 
         String email = emailText.getText().toString();
@@ -109,7 +109,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Login erroné", Toast.LENGTH_LONG).show();
         signInBtn.setEnabled(true);
     }
 
@@ -120,14 +120,14 @@ public class SignInActivity extends AppCompatActivity {
         String password = passwordText.getText().toString();
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailText.setError("enter a valid email address");
+            emailText.setError("enter une adresse email valide");
             valid = false;
         } else {
             emailText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            passwordText.setError("between 4 and 10 alphanumeric characters");
+            passwordText.setError("entre 4 et 10 alphanumeric");
             valid = false;
         } else {
             passwordText.setError(null);

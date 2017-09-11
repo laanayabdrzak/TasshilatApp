@@ -24,7 +24,6 @@ import m2t.com.tashilatappprototype.UI.Accueil.AccueilActivity;
 import m2t.com.tashilatappprototype.UI.BillsPayment.BillsPaymentFragment;
 import m2t.com.tashilatappprototype.UI.ChangePwd.ChangePwdFragment;
 import m2t.com.tashilatappprototype.UI.ContactUs.ContactUsFragment;
-import m2t.com.tashilatappprototype.UI.Depot.DepotFragment;
 import m2t.com.tashilatappprototype.UI.FAQ.FAQFragment;
 import m2t.com.tashilatappprototype.UI.Favoris.FavorisFragment;
 import m2t.com.tashilatappprototype.UI.History.HistoryFragment;
@@ -92,7 +91,8 @@ public class MainActivity extends AppCompatActivity
         // without it on your test device(s)
         toggle.syncState();
 
-		getFragmentManager().beginTransaction().replace(R.id.frame_container, new HomeFragment()).commit();
+		//getFragmentManager().beginTransaction().replace(R.id.frame_container, new HomeFragment()).commit();
+        Utils.replaceFragement(new HomeFragment(), MainActivity.this);
 
 		navigationView = (NavigationView) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
@@ -104,8 +104,15 @@ public class MainActivity extends AppCompatActivity
 		if (drawer.isDrawerOpen(GravityCompat.START)) {
 			drawer.closeDrawer(GravityCompat.START);
 		} else {
-			super.onBackPressed();
+            Utils.replaceFragement(new HomeFragment(), MainActivity.this);
+			//super.onBackPressed();
 		}
+
+        /*if (getFragmentManager().getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+        } else {
+            getFragmentManager().popBackStack();
+        }*/
 	}
 
 	@Override
@@ -113,12 +120,14 @@ public class MainActivity extends AppCompatActivity
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		MenuItem item = menu.findItem(R.id.action_log_out);
+		MenuItem item2 = menu.findItem(R.id.action_add);
 		if (getIntent().getStringExtra("FLAG").equals("client"))
 			item.setVisible(true);
 		else {
 			item.setVisible(false);
 			hideItemMenu();
 		}
+		item2.setVisible(false);
 		return true;
 	}
 
@@ -144,72 +153,89 @@ public class MainActivity extends AppCompatActivity
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public boolean onNavigationItemSelected(MenuItem item) {
-		// Handle navigation view item clicks here.
 		int id = item.getItemId();
 		Fragment fragment = null;
-		boolean replaceFragment = true;
+        Bundle bundle = new Bundle();
 		switch (id) {
 		case R.id.nav_user_info:
 
 			break;
 		case R.id.nav_favoris:
 			fragment = new FavorisFragment();
-            navigationView.setItemTextColor(navMenuTextList);
+            bundle.putString("nav", "");
 			break;
 		case R.id.nav_activer_bloquer:
 
 			break;
 		case R.id.nav_change_pwd:
 			fragment = new ChangePwdFragment();
+            bundle.putString("nav", "");
 			break;
 		case R.id.nav_solde:
 			fragment = new SoldeFragment();
+            bundle.putString("nav", "");
 			break;
-		case R.id.nav_depot:
+		/*case R.id.nav_depot:
 			fragment = new DepotFragment();
-			break;
+            bundle.putString("nav", "");
+			break;*/
 		case R.id.nav_transfert_payment_account:
 			fragment = new TransfertFragment();
+            bundle.putString("nav", "");
 			break;
 		case R.id.nav_manage_accounts:
 			fragment = new AccountPaymentFragment();
+            bundle.putString("nav", "");
 			break;
 		case R.id.nav_history_accounts:
 			fragment = new HistoryFragment();
+            bundle.putString("nav", "history_accounts");
 			break;
 		case R.id.nav_payment_bills:
 			fragment = new BillsPaymentFragment();
-            navigationView.setItemTextColor(navMenuTextList);
+            bundle.putString("nav", "");
 			break;
 		case R.id.nav_recharge:
 			fragment = new RechargeFragment();
+            bundle.putString("nav", "");
 			break;
 		case R.id.nav_transfert:
 			fragment = new TransfertFragment();
+            bundle.putString("nav", "");
 			break;
 		case R.id.nav_achat_biller:
 			fragment = new TicketsFragment();
+            bundle.putString("nav", "");
 			break;
 		case R.id.nav_commercant_payment:
 
 			break;
 		case R.id.nav_history_transaction:
 			fragment = new HistoryFragment();
+            bundle.putString("nav", "history_trans");
 			break;
 		case R.id.nav_news:
 			fragment = new NewsFragment();
+            bundle.putString("nav", "");
 			break;
 		case R.id.nav_faq:
 			fragment = new FAQFragment();
+            bundle.putString("nav", "");
 			break;
 		case R.id.nav_contact_us:
 			fragment = new ContactUsFragment();
+            bundle.putString("nav", "");
 			break;
 		case R.id.nav_notifications:
 			fragment = new NotificationsFragment();
+            bundle.putString("nav", "");
 			break;
+        default:
+            fragment = new HomeFragment();
+            break;
 		}
 		Utils.replaceFragement(fragment, MainActivity.this);
+        fragment.setArguments(bundle);
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
@@ -260,8 +286,11 @@ public class MainActivity extends AppCompatActivity
                 toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // Doesn't have to be onBackPressed
-                        onBackPressed();
+                        if (getFragmentManager().getBackStackEntryCount() == 0) {
+                            moveTaskToBack(false);
+                        } else {
+                            getFragmentManager().popBackStack();
+                        }
                     }
                 });
 
@@ -292,25 +321,7 @@ public class MainActivity extends AppCompatActivity
 
         if (actionBar != null) {
             //actionBar.setHomeAsUpIndicator(R.drawable.ic_add_account_black_24dp);
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayShowCustomEnabled(true);
-
-            toolbarTitle.setText(getResources().getString(id));
-
-        }
-    }
-
-    public void setHiddenDrawerIndicator (int id){
-        toggle.setDrawerIndicatorEnabled(false);
-
-        this.setDrawerLocked(true);
-        getSupportActionBar().setTitle(id);
-        final ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            //actionBar.setHomeAsUpIndicator(R.drawable.ic_add_account_black_24dp);
-            actionBar.setDisplayHomeAsUpEnabled(false);
+            //actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayShowCustomEnabled(true);
 
@@ -321,5 +332,5 @@ public class MainActivity extends AppCompatActivity
 }
 
 interface DrawerLocker {
-	public void setDrawerLocked(boolean shouldLock);
+    void setDrawerLocked(boolean shouldLock);
 }

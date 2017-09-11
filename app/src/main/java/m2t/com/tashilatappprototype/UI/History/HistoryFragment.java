@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import m2t.com.tashilatappprototype.Adapter.InvoiceAdapter;
+import m2t.com.tashilatappprototype.Common.POJO.Invoice;
 import m2t.com.tashilatappprototype.Common.utils.DayAxisValueFormatter;
 import m2t.com.tashilatappprototype.Common.utils.MyAxisValueFormatter;
 import m2t.com.tashilatappprototype.Common.utils.XYMarkerView;
@@ -43,7 +44,9 @@ public class HistoryFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_history, container, false);
 		((MainActivity) getActivity()).enableViews(false);
-		((MainActivity) getActivity()).setActionBarTitle(R.string.histo_comptes_title);
+        if (getArguments().getString("nav").equals("history_accounts"))
+		    ((MainActivity) getActivity()).setActionBarTitle(R.string.histo_comptes_title);
+        else ((MainActivity) getActivity()).setActionBarTitle(R.string.histo_trans_title);
 		rv = (RecyclerView) v.findViewById(R.id.rv);
 
 		mChart = (BarChart) v.findViewById(R.id.chart1);
@@ -94,9 +97,13 @@ public class HistoryFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		List invoiceItems = new ArrayList();
-		for (int i = 0; i < 6; i++)
-			invoiceItems.add("");
+        List<Invoice> invoiceItems = new ArrayList();
+        invoiceItems.add(new Invoice("N° 21344452", "231,55 Dhs", "Payé", "13 Aout 2017 13h05", R.drawable.b0006));
+        invoiceItems.add(new Invoice("N° 54665444", "60,65 Dhs", "Payé", "13 Aout 2017 13h05", R.drawable.b0011));
+        invoiceItems.add(new Invoice("N° 09554332", "342,09 Dhs", "Payé", "29 Juin 2017 12h33", R.drawable.b0007));
+        invoiceItems.add(new Invoice("N° 33456666", "603,12 Dhs", "Payé", "13 Aout 2017 22h57", R.drawable.b0004));
+        invoiceItems.add(new Invoice("N° 12322111", "14,06 Dhs", "Payé", "13 Aout 2017 09h11", R.drawable.b0009));
+
 		InvoiceAdapter invoiceAdapter = new InvoiceAdapter(getActivity(), invoiceItems);
 		final LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 		rv.setLayoutManager(llm);

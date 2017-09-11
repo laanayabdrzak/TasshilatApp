@@ -31,10 +31,10 @@
                     android:id="@+id/nav_solde"
                     android:icon="@drawable/ic_menu_send"
                     android:title="Solde" />
-                <item
+                <!--<item
                     android:id="@+id/nav_depot"
                     android:icon="@drawable/ic_menu_send"
-                    android:title="Dépots" />
+                    android:title="Dépots" />-->
                 <item
                     android:id="@+id/nav_transfert_payment_account"
                     android:icon="@drawable/ic_menu_send"

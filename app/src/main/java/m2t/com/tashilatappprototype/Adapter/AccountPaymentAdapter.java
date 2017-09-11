@@ -2,8 +2,11 @@ package m2t.com.tashilatappprototype.Adapter;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +18,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import m2t.com.tashilatappprototype.Common.POJO.Account;
@@ -28,13 +33,20 @@ import m2t.com.tashilatappprototype.UI.ConfigureOperator.ConfigureOperatorFragme
 
 public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAdapter.MyViewHolder> {
 
+    private static final int PENDING_REMOVAL_TIMEOUT = 3000; // 3sec
     private Context mContext;
     private List<Account> accountList;
+    private List<Account> itemsPendingRemoval;
+    boolean undoOn; // is undo on, you can turn it on from the toolbar menu
+
+    private Handler handler = new Handler(); // hanlder for running delayed runnables
+    HashMap<Account, Runnable> pendingRunnables = new HashMap<>(); // map of items to pending runnables, so we can cancel a removal if need be
 
 
     public AccountPaymentAdapter(Context mContext, List<Account> accountList) {
         this.mContext = mContext;
         this.accountList = accountList;
+        itemsPendingRemoval = new ArrayList<>();
     }
 
     @Override
@@ -50,7 +62,7 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
 
         Account acc = accountList.get(position);
         holder.title.setText(acc.getName());
-        holder.count.setText("UAN : " + acc.getUan());
+        //holder.count.setText("UAN : " + acc.getUan());
 
         // loading acc cover using Glide library
         Glide.with(mContext).load(acc.getThumbnail()).into(holder.thumbnail);
@@ -61,8 +73,25 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
                 showPopupMenu(holder.overflow);
             }
         });
+        // Delete Process
+        final Account item = accountList.get(position);
+
+        if (itemsPendingRemoval.contains(item)) {
+            // we need to show the "undo" state of the row
+            holder.itemView.setBackgroundColor(Color.RED);
+
+        } else {
+            // we need to show the "normal" state
+            holder.itemView.setBackgroundColor(Color.WHITE);
+
+        }
     }
 
+    public void notifyData(List<Account> accountList) {
+        Log.d("notifyData ", accountList.size() + "");
+        this.accountList = accountList;
+        notifyDataSetChanged();
+    }
     /**
      * Showing popup menu when tapping on 3 dots
      */
@@ -75,6 +104,43 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
         popup.show();
     }
 
+    public boolean isUndoOn() {
+        return undoOn;
+    }
+
+    public void pendingRemoval(int position) {
+        final Account item = accountList.get(position);
+        if (!itemsPendingRemoval.contains(item)) {
+            itemsPendingRemoval.add(item);
+            // this will redraw row in "undo" state
+            notifyItemChanged(position);
+            // let's create, store and post a runnable to remove the item
+            Runnable pendingRemovalRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    remove(accountList.indexOf(item));
+                }
+            };
+            handler.postDelayed(pendingRemovalRunnable, PENDING_REMOVAL_TIMEOUT);
+            pendingRunnables.put(item, pendingRemovalRunnable);
+        }
+    }
+
+    public void remove(int position) {
+        Account item = accountList.get(position);
+        if (itemsPendingRemoval.contains(item)) {
+            itemsPendingRemoval.remove(item);
+        }
+        if (accountList.contains(item)) {
+            accountList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public boolean isPendingRemoval(int position) {
+        Account item = accountList.get(position);
+        return itemsPendingRemoval.contains(item);
+    }
 
     /**
      * Click listener for popup menu items

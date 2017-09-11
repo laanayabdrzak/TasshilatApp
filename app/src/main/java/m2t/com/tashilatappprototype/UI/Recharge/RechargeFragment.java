@@ -9,15 +9,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import m2t.com.tashilatappprototype.Adapter.AccountPaymentAdapter;
 import m2t.com.tashilatappprototype.Adapter.util.GridSpacingItemDecoration;
+import m2t.com.tashilatappprototype.Adapter.util.RecyclerTouchListener;
 import m2t.com.tashilatappprototype.Common.POJO.Account;
 import m2t.com.tashilatappprototype.Common.utils.Utils;
 import m2t.com.tashilatappprototype.R;
+import m2t.com.tashilatappprototype.UI.ConfigureOperator.ConfigureOperatorFragment;
 import m2t.com.tashilatappprototype.UI.MainActivity;
 
 /**
@@ -28,7 +31,7 @@ public class RechargeFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private AccountPaymentAdapter adapter;
-
+    private Fragment fragment;
     private List<Account> accountsList;
 
     public RechargeFragment() {
@@ -52,7 +55,30 @@ public class RechargeFragment extends Fragment {
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, Utils.dpToPx(this.getActivity(), 10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+        /**
+         * RecyclerView: Implementing single item click and long press (Part-II)
+         * */
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
+                recyclerView, new RecyclerTouchListener.ClickListener() {
 
+            @Override
+            public void onClick(View view, int position) {
+
+                int itemPosition = recyclerView.getChildLayoutPosition(view);
+                Account item = accountsList.get(itemPosition);
+                fragment = new ConfigureOperatorFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("logo_operator",String.valueOf(item.getThumbnail()));
+                bundle.putString("title_operator",item.getName());
+                fragment.setArguments(bundle);
+                Utils.replaceFragement(fragment, getActivity());
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Toast.makeText(getActivity(), "Ajouter aux favourites", Toast.LENGTH_LONG).show();
+            }
+        }));
         prepareAccounts();
         return rootView;
     }

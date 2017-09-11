@@ -39,7 +39,7 @@ public class BillsPaymentFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_bills_payment, container, false);
         ((MainActivity) getActivity()).enableViews(false);
@@ -63,16 +63,20 @@ public class BillsPaymentFragment extends Fragment {
 
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(getActivity(), "onCLick", Toast.LENGTH_LONG).show();
+
+                int itemPosition = recyclerView.getChildLayoutPosition(view);
+                Account item = accountsList.get(itemPosition);
                 fragment = new ConfigureOperatorFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString("logo_operator","");
+                bundle.putString("logo_operator",String.valueOf(item.getThumbnail()));
+                bundle.putString("title_operator",item.getName());
+                fragment.setArguments(bundle);
                 Utils.replaceFragement(fragment, getActivity());
             }
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "onLongClick", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Ajouter aux favourites", Toast.LENGTH_LONG).show();
             }
         }));
         prepareAccounts();
@@ -101,46 +105,46 @@ public class BillsPaymentFragment extends Fragment {
                 R.drawable.b0051,
         };
 
-        Account a = new Account("", 1332333214, covers[0]);
+        Account a = new Account("Lydec", 1332333214, covers[0]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[1]);
+        a = new Account("Redal", 1332333214, covers[1]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[2]);
+        a = new Account("RAMSA", 1332333214, covers[2]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[3]);
+        a = new Account("AMENDIS", 1332333214, covers[3]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[4]);
+        a = new Account("ONEE", 1332333214, covers[4]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[5]);
+        a = new Account("RADEEMA", 1332333214, covers[5]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[6]);
+        a = new Account("RADEEO", 1332333214, covers[6]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[7]);
+        a = new Account("RADEEF", 1332333214, covers[7]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[8]);
+        a = new Account("RAK", 1332333214, covers[8]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[9]);
+        a = new Account("STAREO", 1332333214, covers[9]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[10]);
+        a = new Account("RADEES", 1332333214, covers[10]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[11]);
+        a = new Account("RADEEL", 1332333214, covers[11]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[12]);
+        a = new Account("RADEEJ", 1332333214, covers[12]);
         accountsList.add(a);
 
-        a = new Account("", 1332333214, covers[13]);
+        a = new Account("RADEM", 1332333214, covers[13]);
         accountsList.add(a);
 
 

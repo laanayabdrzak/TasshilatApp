@@ -2,8 +2,8 @@ package m2t.com.tashilatappprototype.Common.POJO;
 
 public class Invoice {
 
-	String ref, amount, status, date;
-	int icon;
+	private String ref, amount, status, date;
+	private int icon;
 
 	public Invoice(String ref, String amount, String status, String date, int icon) {
 		this.ref = ref;

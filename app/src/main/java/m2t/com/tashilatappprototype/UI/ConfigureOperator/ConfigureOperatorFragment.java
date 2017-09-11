@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Switch;
+import android.widget.TextView;
 
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.UI.MainActivity;
@@ -18,6 +18,7 @@ import m2t.com.tashilatappprototype.UI.MainActivity;
 public class ConfigureOperatorFragment extends Fragment {
 
     private ImageView imgOperator;
+    private TextView titleLogo;
 
 
     public ConfigureOperatorFragment() {
@@ -32,10 +33,13 @@ public class ConfigureOperatorFragment extends Fragment {
         ((MainActivity) getActivity()).enableViews(true);
         ((MainActivity) getActivity()).setActionBarTitle(R.string.conf_oper_title);
         imgOperator = (ImageView) rootView.findViewById(R.id.img_operator);
-        Switch simpleSwitch = (Switch) rootView.findViewById(R.id.simpleSwitch); // initiate Switch
+        titleLogo = (TextView) rootView.findViewById(R.id.title_logo);
 
-        simpleSwitch.setTextOn("On"); // displayed text of the Switch whenever it is in checked or on state
-        simpleSwitch.setTextOff("Off"); // displayed text of the Switch whenever it is in unchecked i.e. off state
+        if (getArguments() != null && !getArguments().getString("logo_operator").trim().equals("")) {
+            imgOperator.setImageResource(Integer.valueOf(getArguments().getString("logo_operator")));
+            titleLogo.setText(getArguments().getString("title_operator"));
+        }
+
 
         return rootView;
     }

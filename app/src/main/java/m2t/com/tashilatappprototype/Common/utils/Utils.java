@@ -19,14 +19,14 @@ public class Utils {
     public static void replaceFragement(Fragment fragment, Activity activity) {
         if (fragment != null && !fragment.isVisible()) {
             FragmentManager fragmentManager = activity.getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).addToBackStack(fragment.getClass().getName()).commit();
         } else Log.e("Fragements", "Error in creating fragment");
     }
 
     public static void replaceFragementFromContext(Fragment fragment, Context context) {
         if (fragment != null && !fragment.isVisible()) {
             FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).addToBackStack(fragment.getClass().getName()).commit();
         } else Log.e("Fragements", "Error in creating fragment");
     }
 
