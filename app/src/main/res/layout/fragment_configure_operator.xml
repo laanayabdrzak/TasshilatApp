@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="m2t.com.tashilatappprototype.UI.ConfigureOperator.ConfigureOperatorFragment">
+    tools:context="m2t.com.tashilatappprototype.ui.configureOperator.ConfigureOperatorFragment">
 
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -40,10 +40,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/input_identifiant"
+                <EditText
+                    android:id="@+id/input_identifiant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
+                    android:maxLength="12"
                     android:hint="Identifiant" />
             </android.support.design.widget.TextInputLayout>
 
@@ -53,9 +55,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/input_address"
+                <EditText
+                    android:id="@+id/input_num_contrat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="12"
                     android:inputType="text"
                     android:hint="N° de contrat" />
             </android.support.design.widget.TextInputLayout>
@@ -66,16 +70,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/input_password"
+                <EditText
+                    android:id="@+id/input_montant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
+                    android:maxLength="10"
                     android:hint="Montant"/>
             </android.support.design.widget.TextInputLayout>
 
             <!-- Signup Button -->
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_signup"
+                android:id="@+id/btn_validate"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"

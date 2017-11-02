@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="m2t.com.tashilatappprototype.UI.TicketsPayment.TicketsFragment">
+    tools:context="m2t.com.tashilatappprototype.ui.ticketsPayment.TicketsFragment">
 
 
     <android.support.v7.widget.RecyclerView

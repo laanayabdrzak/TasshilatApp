@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Swipelibrary/Swipelibrary.iml" filepath="$PROJECT_DIR$/Swipelibrary/Swipelibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/TashilatAppProtoType.iml" filepath="$PROJECT_DIR$/TashilatAppProtoType.iml" />
       <module fileurl="file://$PROJECT_DIR$/TasshilatApp.iml" filepath="$PROJECT_DIR$/TasshilatApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

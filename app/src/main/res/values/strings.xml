@@ -23,6 +23,8 @@
     <string name="solde_title">Solde</string>
     <string name="depot_title">Dépots</string>
     <string name="conf_oper_title">Configurer Operateur</string>
+    <string name="facture_title">Facture</string>
+    <string name="change_pwd_title">Changer mot de passe</string>
     <string name="gerer_comptes_title">Mes comptes de paiement</string>
     <string name="histo_comptes_title">Hitoriques de mes comptes</string>
     <string name="paiemnt_fac_title">Paiement factures</string>
@@ -32,6 +34,8 @@
     <string name="paiemnt_commercant_title">Paiement commerçant</string>
     <string name="histo_trans_title">Historiques des transactions</string>
     <string name="news_title">News</string>
+    <string name="contact_us_title">Contact-nous</string>
+    <string name="notifications_title">Notifications</string>
 
 
     <string name="pref_title_ringtone">Ringtone</string>

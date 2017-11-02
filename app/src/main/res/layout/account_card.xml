@@ -23,7 +23,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:src="@drawable/b0001"
-                android:scaleType="center" />
+                android:scaleType="centerInside" />
 
             <TextView
                 android:id="@+id/title"

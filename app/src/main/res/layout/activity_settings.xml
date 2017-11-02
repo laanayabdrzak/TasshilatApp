@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="m2t.com.tashilatappprototype.UI.Settings.SettingsActivity">
+    tools:context="m2t.com.tashilatappprototype.ui.settings.SettingsActivity">
 
 </android.support.constraint.ConstraintLayout>

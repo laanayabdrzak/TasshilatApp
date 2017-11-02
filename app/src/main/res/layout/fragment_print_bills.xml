@@ -1,0 +1,138 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="m2t.com.tashilatappprototype.ui.printBills.PrintBillsFragment">
+
+
+    <RelativeLayout
+        android:id="@+id/relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+        <ImageView
+            android:id="@+id/logo_operator"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/b0001"/>
+
+        <ImageView
+            android:id="@+id/logo_m2t"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentRight="true"/>
+        <TextView
+            android:id="@+id/title_recu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_below="@id/logo_operator"
+            android:text="Reçu de paiement emis par M2T"/>
+
+        <TextView
+            android:id="@+id/date_transaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/title_recu"
+            android:textColor="@color/black"
+            android:text="Date de transaction: 01/08/2017 a 10:55:38"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/date_transaction"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Operateur "
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Espace Services "
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No reçu "
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:text="No Trasaction Operateur "
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nom client "
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/operator_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=": RADEEF"
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/esp_service_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=": 231188470"
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/no_recu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=": 04fecd4345554"
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:text=": 00422432123"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=": BENACER MOHAMED "
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/print_bill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="Export PDF"/>
+</FrameLayout>

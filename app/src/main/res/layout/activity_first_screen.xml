@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="m2t.com.tashilatappprototype.UI.Accueil.AccueilActivity">
+    tools:context="m2t.com.tashilatappprototype.ui.accueil.AccueilActivity">
 
     <ImageView
         android:id="@+id/imageView4"
@@ -39,13 +39,13 @@
         android:id="@+id/txt_one"
         android:layout_width="348dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:gravity="center"
         android:text="Je suis pas client"
         android:textColor="@color/cardview_dark_background"
         android:typeface="serif"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/txt_two"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
