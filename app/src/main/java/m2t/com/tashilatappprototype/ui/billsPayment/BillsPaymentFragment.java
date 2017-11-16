@@ -103,66 +103,6 @@ public class BillsPaymentFragment extends Fragment {
             Log.d(TAG,"name : " + account.getName() +" id : "+ account.getThumbnail());
             accountsList.add(account);
         }
-        /*int[] covers = new int[]{
-                R.drawable.b0001,
-                R.drawable.b0002,
-                R.drawable.b0009,
-                R.drawable.b0011,
-                R.drawable.b0013,
-                R.drawable.b0019,
-                R.drawable.b0025,
-                R.drawable.b0026,
-                R.drawable.b0027,
-                R.drawable.b0029,
-                R.drawable.b0030,
-                R.drawable.b0032,
-                R.drawable.b0035,
-                R.drawable.b0051,
-        };
-
-        Account a = new Account("Lydec", 1332333214, covers[0]);
-        accountsList.add(a);
-
-        a = new Account("Redal", 1332333214, covers[1]);
-        accountsList.add(a);
-
-        a = new Account("RAMSA", 1332333214, covers[2]);
-        accountsList.add(a);
-
-        a = new Account("AMENDIS", 1332333214, covers[3]);
-        accountsList.add(a);
-
-        a = new Account("ONEE", 1332333214, covers[4]);
-        accountsList.add(a);
-
-        a = new Account("RADEEMA", 1332333214, covers[5]);
-        accountsList.add(a);
-
-        a = new Account("RADEEO", 1332333214, covers[6]);
-        accountsList.add(a);
-
-        a = new Account("RADEEF", 1332333214, covers[7]);
-        accountsList.add(a);
-
-        a = new Account("RAK", 1332333214, covers[8]);
-        accountsList.add(a);
-
-        a = new Account("STAREO", 1332333214, covers[9]);
-        accountsList.add(a);
-
-        a = new Account("RADEES", 1332333214, covers[10]);
-        accountsList.add(a);
-
-        a = new Account("RADEEL", 1332333214, covers[11]);
-        accountsList.add(a);
-
-        a = new Account("RADEEJ", 1332333214, covers[12]);
-        accountsList.add(a);
-
-        a = new Account("RADEM", 1332333214, covers[13]);
-        accountsList.add(a);
-        */
-
         adapter.notifyDataSetChanged();
     }
 }

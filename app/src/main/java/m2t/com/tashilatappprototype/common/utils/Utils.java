@@ -66,7 +66,7 @@ public class Utils {
             opr.setCategorie_id(operWS.get(i).getCategorie().getItem().getID());
             opr.setCategorie_name(operWS.get(i).getCategorie().getItem().getName());
 
-            Log.d(TAG,"item " + i + "==> "+ opr.getName() + " id "+ opr.getID_OPER());
+            Log.d(TAG,"item " + i + "==> "+ opr.getName() + " id "+ opr.getID_OPER() + "Categorie " + opr.getCategorie_name());
             operDB.add(opr);
         }
 

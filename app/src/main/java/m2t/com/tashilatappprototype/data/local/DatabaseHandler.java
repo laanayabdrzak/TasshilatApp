@@ -109,7 +109,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting All Contacts
     public List<Operator> getAllOperators() {
-        List<Operator> operatorsList = new ArrayList<Operator>();
+        List<Operator> operatorsList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_OPERATORS;
 
@@ -133,6 +133,35 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.d(TAG, "Fetching operatorsList from Sqlite: " + operatorsList.toString());
         // return contact list
         return operatorsList;
+    }
+
+    public List<Operator> getOperatorByCategorie(String[] categorieNames) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Operator> operatorList = new ArrayList<>();
+        String selectQuery = null;
+        Cursor cursor = null;
+        for (String categorieName : categorieNames) {
+            selectQuery = "SELECT  * FROM " + TABLE_OPERATORS + " WHERE " + KEY_CATEGORIE_NAME + " ='" + categorieName + "'";
+            cursor = db.rawQuery(selectQuery, null);
+        }
+        /*Cursor cursor = db.query(TABLE_OPERATORS, new String[] { KEY_ID,
+                        KEY_NAME, KEY_DESC, KEY_ISFAVORI, KEY_CATEGORIE_ID, KEY_CATEGORIE_NAME }, KEY_CATEGORIE_NAME + "=?",
+                categorieName, null, null, null, null);*/
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Operator operator = new Operator();
+            operator.setID_OPER(cursor.getString(1));
+            operator.setName(cursor.getString(2));
+            operator.setDescription(cursor.getString(3));
+            operator.setFavorite(cursor.getInt(4));
+            operator.setCategorie_id(cursor.getString((5)));
+            operator.setCategorie_name(cursor.getString(6));
+            operatorList.add(operator);
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return operatorList;
     }
 
     // Deleting single contact

@@ -26,7 +26,7 @@ public class ChangePwdFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_change_pwd, container, false);
         ((MainActivity) getActivity()).enableViews(true);
-        ((MainActivity) getActivity()).setActionBarTitle(R.string.facture_title);
+        ((MainActivity) getActivity()).setActionBarTitle(R.string.change_pwd_title);
 
         return rootView;
     }

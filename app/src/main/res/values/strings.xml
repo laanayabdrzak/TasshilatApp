@@ -34,9 +34,61 @@
     <string name="paiemnt_commercant_title">Paiement commerçant</string>
     <string name="histo_trans_title">Historiques des transactions</string>
     <string name="news_title">News</string>
-    <string name="contact_us_title">Contact-nous</string>
+    <string name="contact_us_title">Contactez-nous</string>
     <string name="notifications_title">Notifications</string>
 
+    <string-array name="type_identifiant_array">
+        <item>No Police</item>
+        <item>No Compteur</item>
+        <item>No tournee</item>
+        <item>No Facture</item>
+        <item>CIN</item>
+    </string-array>
+    <string-array name="type_identifiant_array_values" translatable="false">
+        <item>6</item>
+        <item>7</item>
+        <item>3</item>
+        <item>4</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="type_identifiant_radeeo">
+        <item>No Contrat</item>
+        <item>No Facture</item>
+    </string-array>
+    <string-array name="type_identifiant_radeema">
+        <item>No Police</item>
+    </string-array>
+
+    <string-array name="type_identifiant_radeef">
+        <item>No Facture</item>
+    </string-array>
+
+    <string-array name="type_identifiant_onee">
+        <item>No Facture</item>
+        <item>No Police</item>
+    </string-array>
+    <string-array name="type_identifiant_amendis">
+        <item>No Contrat</item>
+        <item>No Facture</item>
+        <item>No Client</item>
+    </string-array>
+
+    <string-array name="type_identifiant_rak">
+        <item>No Contrat</item>
+        <item>Id Client</item>
+    </string-array>
+
+    <string-array name="type_identifiant_ramsa">
+        <item>No Facture</item>
+        <item>No Police</item>
+    </string-array>
+
+    <string-array name="type_identifiant_redal">
+        <item>CIL</item>
+        <item>Identifiant Client</item>
+        <item>No Facture</item>
+    </string-array>
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
