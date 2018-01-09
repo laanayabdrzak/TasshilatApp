@@ -21,6 +21,8 @@ public class SearchForm {
     private String nofacture;
     @SerializedName("nocin")
     private String nocin;
+    @SerializedName("codecentre")
+    private String codecentre;
 
 
     public SearchForm() {
@@ -72,5 +74,13 @@ public class SearchForm {
 
     public void setNocin(String nocin) {
         this.nocin = nocin;
+    }
+
+    public String getCodecentre() {
+        return codecentre;
+    }
+
+    public void setCodecentre(String codecentre) {
+        this.codecentre = codecentre;
     }
 }

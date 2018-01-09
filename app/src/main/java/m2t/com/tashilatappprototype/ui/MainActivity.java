@@ -24,7 +24,7 @@ import java.util.HashMap;
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.common.pojo.LogOutResponse;
 import m2t.com.tashilatappprototype.common.utils.SessionManager;
-import m2t.com.tashilatappprototype.common.utils.Utils;
+import m2t.com.tashilatappprototype.common.utils.Utility;
 import m2t.com.tashilatappprototype.data.local.DatabaseHandler;
 import m2t.com.tashilatappprototype.data.remote.ApiClient;
 import m2t.com.tashilatappprototype.data.remote.ApiInterface;
@@ -32,9 +32,9 @@ import m2t.com.tashilatappprototype.ui.accountsPayment.AccountPaymentFragment;
 import m2t.com.tashilatappprototype.ui.billsPayment.BillsPaymentFragment;
 import m2t.com.tashilatappprototype.ui.changePwd.ChangePwdFragment;
 import m2t.com.tashilatappprototype.ui.contactUs.ContactUsFragment;
+import m2t.com.tashilatappprototype.ui.dashboard.DashboardFragment;
 import m2t.com.tashilatappprototype.ui.faq.FAQFragment;
 import m2t.com.tashilatappprototype.ui.history.HistoryFragment;
-import m2t.com.tashilatappprototype.ui.home.HomeFragment;
 import m2t.com.tashilatappprototype.ui.news.NewsFragment;
 import m2t.com.tashilatappprototype.ui.notifications.NotificationsFragment;
 import m2t.com.tashilatappprototype.ui.recharge.RechargeFragment;
@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity
         toolbar.setSubtitle("");
         toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
 
-
 		setSupportActionBar(toolbar);
 		invalidateOptionsMenu();
 
@@ -105,29 +104,40 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
 		//getFragmentManager().beginTransaction().replace(R.id.frame_container, new HomeFragment()).commit();
-        Utils.replaceFragement(new HomeFragment(), MainActivity.this);
+        //Utility.replaceFragement(new HomeFragment(), MainActivity.this);
+        Utility.replaceFragement(new DashboardFragment(), MainActivity.this);
 
 		navigationView = (NavigationView) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
+		navigationView.setCheckedItem(R.id.nav_dashboard);
 
 		controlOnUser();
 	}
 
+	private int checkNavigationMenuItem() {
+		Menu menu = navigationView.getMenu();
+		for (int i = 0; i < menu.size(); i++) {
+			if (menu.getItem(i).isChecked())
+				return i;
+		}
+		return -1;
+	}
+
 	@Override
 	public void onBackPressed() {
+		int count = getFragmentManager().getBackStackEntryCount();
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		if (drawer.isDrawerOpen(GravityCompat.START)) {
 			drawer.closeDrawer(GravityCompat.START);
 		} else {
-            Utils.replaceFragement(new HomeFragment(), MainActivity.this);
-			//super.onBackPressed();
+			if (count == 0) {
+				super.onBackPressed();
+				//additional code
+			} else {
+				getFragmentManager().popBackStack();
+			}
 		}
 
-        /*if (getFragmentManager().getBackStackEntryCount() == 0) {
-            super.onBackPressed();
-        } else {
-            getFragmentManager().popBackStack();
-        }*/
 	}
 
 	@Override
@@ -158,7 +168,7 @@ public class MainActivity extends AppCompatActivity
 			startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 			break;
 		case R.id.action_log_out:
-            logOututUser();
+            logOutUser();
 			break;
 		}
 
@@ -173,84 +183,73 @@ public class MainActivity extends AppCompatActivity
         Bundle bundle = new Bundle();
 		switch (id) {
 		case R.id.nav_user_info:
-			fragment = new UserInfoFragment();
+			Utility.replaceFragement(new UserInfoFragment(), MainActivity.this);
 			break;
-		/*case R.id.nav_favoris:
-			fragment = new FavorisFragment();
-            bundle.putString("nav", "");
-			break;*/
+		case R.id.nav_dashboard:
+			Utility.replaceFragement(new DashboardFragment(), MainActivity.this);
+			break;
 		/*case R.id.nav_activer_bloquer:
 
 			break;*/
 		case R.id.nav_change_pwd:
-			fragment = new ChangePwdFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new ChangePwdFragment(), MainActivity.this);
 			break;
 		case R.id.nav_solde:
-			fragment = new SoldeFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new SoldeFragment(), MainActivity.this);
 			break;
 		/*case R.id.nav_depot:
 			fragment = new DepotFragment();
             bundle.putString("nav", "");
 			break;*/
 		case R.id.nav_transfert_payment_account:
-			fragment = new TransfertFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new TransfertFragment(), MainActivity.this);
 			break;
 		case R.id.nav_manage_accounts:
-			fragment = new AccountPaymentFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new AccountPaymentFragment(), MainActivity.this);
 			break;
 		case R.id.nav_history_accounts:
-			fragment = new HistoryFragment();
-            bundle.putString("nav", "history_accounts");
+			Utility.replaceFragement(new HistoryFragment(), MainActivity.this);
 			break;
 		case R.id.nav_payment_bills:
-			fragment = new BillsPaymentFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new BillsPaymentFragment(), MainActivity.this);
 			break;
 		case R.id.nav_recharge:
-			fragment = new RechargeFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new RechargeFragment(), MainActivity.this);
 			break;
 		case R.id.nav_transfert:
-			fragment = new TransfertFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new TransfertFragment(), MainActivity.this);
 			break;
 		case R.id.nav_achat_biller:
-			fragment = new TicketsFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new TicketsFragment(), MainActivity.this);
 			break;
 		case R.id.nav_commercant_payment:
 
 			break;
 		case R.id.nav_history_transaction:
-			fragment = new HistoryFragment();
-            bundle.putString("nav", "history_trans");
+			Utility.replaceFragement(new HistoryFragment(), MainActivity.this);
 			break;
 		case R.id.nav_news:
-			fragment = new NewsFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new NewsFragment(), MainActivity.this);
 			break;
 		case R.id.nav_faq:
-			fragment = new FAQFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new FAQFragment(), MainActivity.this);
 			break;
 		case R.id.nav_contact_us:
-			fragment = new ContactUsFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new ContactUsFragment(), MainActivity.this);
 			break;
 		case R.id.nav_notifications:
-			fragment = new NotificationsFragment();
-            bundle.putString("nav", "");
+			Utility.replaceFragement(new NotificationsFragment(), MainActivity.this);
+			break;
+		case R.id.nav_log_out:
+			logOutUser();
 			break;
         default:
-            fragment = new HomeFragment();
+            DashboardFragment fragmentActivity = new DashboardFragment();
+			Utility.replaceFragement(fragmentActivity, MainActivity.this);
+			fragmentActivity.setArguments(bundle);
             break;
 		}
-		Utils.replaceFragement(fragment, MainActivity.this);
-        fragment.setArguments(bundle);
+
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
@@ -302,7 +301,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v) {
                         if (getFragmentManager().getBackStackEntryCount() == 0) {
-                            moveTaskToBack(false);
+							onBackPressed();
                         } else {
                             getFragmentManager().popBackStack();
                         }
@@ -350,7 +349,7 @@ public class MainActivity extends AppCompatActivity
 		sessionManager = new SessionManager(getApplicationContext());
 	}
 
-	private void logOututUser() {
+	private void logOutUser() {
 		ApiInterface apiService =
 				ApiClient.getClient().create(ApiInterface.class);
 		// get user data from session

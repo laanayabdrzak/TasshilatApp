@@ -31,13 +31,20 @@ public class ApiClient {
 
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+            OkHttpClient client = new OkHttpClient.Builder()
+                                                  .addInterceptor(interceptor)
+                                                  //.connectTimeout(10, TimeUnit.SECONDS)
+                                                  //.writeTimeout(10, TimeUnit.SECONDS)
+                                                  //.readTimeout(30, TimeUnit.SECONDS)
+                                                  .build();
+
             retrofit = new Retrofit.Builder()
                                    .baseUrl(BASE_URL)
                                    .client(client)
                                    .addConverterFactory(GsonConverterFactory.create(gson))
                                    .build();
         }
+
         return retrofit;
     }
 }

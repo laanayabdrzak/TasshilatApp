@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import m2t.com.tashilatappprototype.common.pojo.Favourite;
 import m2t.com.tashilatappprototype.R;
+import m2t.com.tashilatappprototype.common.pojo.Merchant;
 
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.ViewHolder> {
 
@@ -30,15 +30,14 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
 			title = (TextView) itemView.findViewById(R.id.title);
 			cardview = (CardView) itemView.findViewById(R.id.card_view);
 		}
-
 	}
 
-	List<Favourite> items;
+	List<Merchant> items;
 	OnCardClickListner onCardClickListner;
 
-	public FavouriteAdapter(Context ctx, List<Favourite> items) {
+	public FavouriteAdapter(Context context, List<Merchant> items) {
 		this.items = items;
-		context = ctx;
+		this.context = context;
 	}
 
 	@Override
@@ -54,9 +53,10 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
 	}
 
 	@Override
-	public void onBindViewHolder(ViewHolder holder, final int position) {
-		holder.title.setText(items.get(position).title);
-		holder.icon.setImageResource(items.get(position).icon);
+	public void onBindViewHolder (ViewHolder holder, final int position) {
+		holder.title.setText(items.get(position).getName());
+		int id = context.getResources().getIdentifier("b" + items.get(position).getThumbnail(), "drawable", context.getPackageName());
+		holder.icon.setImageResource(id);
 		holder.cardview.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

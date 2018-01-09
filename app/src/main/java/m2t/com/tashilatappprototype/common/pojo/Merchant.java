@@ -4,26 +4,35 @@ package m2t.com.tashilatappprototype.common.pojo;
  * Created by laanaya on 8/11/17.
  */
 
-public class Account {
+public class Merchant {
 
     private String name;
     private int uan;
     private String thumbnail;
     private float solde;
+    private Boolean isFavoris;
 
-    public Account() {
+    public Merchant() {
     }
 
-    public Account(String name, int uan, String thumbnail) {
+    public Merchant(String name, int uan, String thumbnail) {
         this.name = name;
         this.uan = uan;
         this.thumbnail = thumbnail;
     }
 
-    public Account(String name, int uan, float solde) {
+    public Merchant(String name, int uan, float solde) {
         this.name = name;
         this.uan = uan;
         this.solde = solde;
+    }
+
+    public Boolean getFavoris() {
+        return isFavoris;
+    }
+
+    public void setFavoris(Boolean favoris) {
+        isFavoris = favoris;
     }
 
     public float getSolde() {

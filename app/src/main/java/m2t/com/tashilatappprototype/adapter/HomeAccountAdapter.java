@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import m2t.com.tashilatappprototype.common.pojo.Account;
+import m2t.com.tashilatappprototype.common.pojo.Merchant;
 import m2t.com.tashilatappprototype.R;
 
 public class HomeAccountAdapter extends RecyclerView.Adapter<HomeAccountAdapter.ViewHolder> {
@@ -29,10 +29,10 @@ public class HomeAccountAdapter extends RecyclerView.Adapter<HomeAccountAdapter.
         }
     }
 
-    List<Account> items;
+    List<Merchant> items;
     OnCardClickListner onCardClickListner;
 
-    public HomeAccountAdapter(Context ctx, List<Account> items) {
+    public HomeAccountAdapter(Context ctx, List<Merchant> items) {
         this.items = items;
         context = ctx;
     }

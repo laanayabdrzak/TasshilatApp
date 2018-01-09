@@ -1,8 +1,9 @@
 package m2t.com.tashilatappprototype.ui.transfert;
 
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +18,8 @@ import java.util.List;
 import m2t.com.tashilatappprototype.adapter.AccountPaymentAdapter;
 import m2t.com.tashilatappprototype.adapter.util.GridSpacingItemDecoration;
 import m2t.com.tashilatappprototype.adapter.util.RecyclerTouchListener;
-import m2t.com.tashilatappprototype.common.pojo.Account;
+import m2t.com.tashilatappprototype.common.pojo.Merchant;
+import m2t.com.tashilatappprototype.common.utils.Utility;
 import m2t.com.tashilatappprototype.common.utils.Utils;
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.ui.configureOperator.ConfigureOperatorFragment;
@@ -26,12 +28,12 @@ import m2t.com.tashilatappprototype.ui.MainActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TransfertFragment extends Fragment {
+public class TransfertFragment extends Fragment implements AccountPaymentAdapter.AccountAdapterListener{
 
     private RecyclerView recyclerView;
     private AccountPaymentAdapter adapter;
     private Fragment fragment;
-    private List<Account> accountsList;
+    private List<Merchant> accountsList;
 
 
     public TransfertFragment() {
@@ -49,7 +51,7 @@ public class TransfertFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         accountsList = new ArrayList<>();
-        adapter = new AccountPaymentAdapter(this.getActivity(), accountsList);
+        adapter = new AccountPaymentAdapter(this.getActivity(), accountsList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -66,13 +68,13 @@ public class TransfertFragment extends Fragment {
             public void onClick(View view, int position) {
 
                 int itemPosition = recyclerView.getChildLayoutPosition(view);
-                Account item = accountsList.get(itemPosition);
-                fragment = new ConfigureOperatorFragment();
+                Merchant item = accountsList.get(itemPosition);
+                android.support.v4.app.Fragment fragment = new ConfigureOperatorFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("logo_operator",String.valueOf(item.getThumbnail()));
                 bundle.putString("title_operator",item.getName());
                 fragment.setArguments(bundle);
-                Utils.replaceFragement(fragment, getActivity());
+                Utility.replaceFragement(fragment, (FragmentActivity) getActivity());
             }
 
             @Override
@@ -97,23 +99,28 @@ public class TransfertFragment extends Fragment {
                 R.drawable.b0045
         };
 
-        Account a = new Account("Amanty PFG", 1332333214, covers[0]);
+        Merchant a = new Merchant("Amanty PFG", 1332333214, covers[0]);
         accountsList.add(a);
 
-        a = new Account("amanty web", 1332333214, covers[1]);
+        a = new Merchant("amanty web", 1332333214, covers[1]);
         accountsList.add(a);
 
-        a = new Account("proxicash", 1332333214, covers[2]);
+        a = new Merchant("proxicash", 1332333214, covers[2]);
         accountsList.add(a);
 
-        a = new Account("wcash", 1332333214, covers[3]);
+        a = new Merchant("wcash", 1332333214, covers[3]);
         accountsList.add(a);
 
-        a = new Account("Salafin", 1332333214, covers[4]);
+        a = new Merchant("Salafin", 1332333214, covers[4]);
         accountsList.add(a);
 
 
 
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onContactSelected(Merchant merchant) {
+
     }
 }

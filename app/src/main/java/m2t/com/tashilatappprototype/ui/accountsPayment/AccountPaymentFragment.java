@@ -2,7 +2,7 @@ package m2t.com.tashilatappprototype.ui.accountsPayment;
 
 
 import android.app.Dialog;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -29,18 +29,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import m2t.com.tashilatappprototype.adapter.AccountPaymentAdapter;
-import m2t.com.tashilatappprototype.common.pojo.Account;
+import m2t.com.tashilatappprototype.common.pojo.Merchant;
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.ui.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AccountPaymentFragment extends Fragment {
+public class AccountPaymentFragment extends Fragment implements AccountPaymentAdapter.AccountAdapterListener{
 
     private RecyclerView recyclerView;
     private AccountPaymentAdapter adapter;
-    private List<Account> accountsList;
+    private List<Merchant> accountsList;
     private Dialog dialog;
     public AccountPaymentFragment() {
         // Required empty public constructor
@@ -91,7 +91,7 @@ public class AccountPaymentFragment extends Fragment {
 
     private void setUpRecyclerView() {
 
-        adapter = new AccountPaymentAdapter(this.getActivity(), accountsList);
+        adapter = new AccountPaymentAdapter(this.getActivity(), accountsList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -111,20 +111,20 @@ public class AccountPaymentFragment extends Fragment {
                 R.drawable.citibank
                 };
 
-        Account a = new Account("Compte 1", 1332333214, covers[0]);
+        Merchant a = new Merchant("Compte 1", 1332333214, covers[0]);
         accountsList.add(a);
 
-        a = new Account("Compte 2", 1332333214, covers[1]);
+        a = new Merchant("Compte 2", 1332333214, covers[1]);
         accountsList.add(a);
 
-        a = new Account("Compte 3", 1332333214, covers[2]);
+        a = new Merchant("Compte 3", 1332333214, covers[2]);
         accountsList.add(a);
 
         adapter.notifyDataSetChanged();
     }
 
     private void addPaymentAccount() {
-        Account a = new Account("Compte 4", 1332333214, R.drawable.citibank);
+        Merchant a = new Merchant("Compte 4", 1332333214, R.drawable.citibank);
         accountsList.add(a);
         adapter.notifyData(accountsList);
         dialog.dismiss();
@@ -341,5 +341,10 @@ public class AccountPaymentFragment extends Fragment {
             }
 
         });
+    }
+
+    @Override
+    public void onContactSelected(Merchant merchant) {
+
     }
 }

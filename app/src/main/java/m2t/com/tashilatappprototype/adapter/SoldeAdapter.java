@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import m2t.com.tashilatappprototype.common.pojo.Account;
+import m2t.com.tashilatappprototype.common.pojo.Merchant;
 import m2t.com.tashilatappprototype.R;
 
 /**
@@ -24,11 +24,11 @@ import m2t.com.tashilatappprototype.R;
 public class SoldeAdapter extends RecyclerView.Adapter<SoldeAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Account> accountList;
+    private List<Merchant> merchantList;
 
-    public SoldeAdapter(Context mContext, List<Account> accountList) {
+    public SoldeAdapter(Context mContext, List<Merchant> merchantList) {
         this.mContext = mContext;
-        this.accountList = accountList;
+        this.merchantList = merchantList;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class SoldeAdapter extends RecyclerView.Adapter<SoldeAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
-        Account acc = accountList.get(position);
+        Merchant acc = merchantList.get(position);
         holder.title.setText(acc.getName());
         holder.count.setText("UAN : " + acc.getUan());
         holder.solde.setText("Solde : " + acc.getSolde());
@@ -96,7 +96,7 @@ public class SoldeAdapter extends RecyclerView.Adapter<SoldeAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return accountList.size();
+        return merchantList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

@@ -49,8 +49,8 @@ public class SignInActivity extends AppCompatActivity {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //logOututUser();
                 login();
+                //onLoginSuccess();
             }
         });
 
@@ -120,7 +120,7 @@ public class SignInActivity extends AppCompatActivity {
                     if (response.body().getUserProfile() != null) {
                         List<Operator> operators =
                                 Utils.fromWSToDB(response.body().getUserProfile().getListOper().getOperatorWSList());
-                        for (Operator op : operators){
+                        for (Operator op : operators) {
                             Log.i("Operator name: ", op.getName() + " id = " + op.getID_OPER());
                             db.addOperator(op);
                         }

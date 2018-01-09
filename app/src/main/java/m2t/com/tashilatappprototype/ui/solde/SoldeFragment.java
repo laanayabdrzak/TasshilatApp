@@ -1,21 +1,24 @@
 package m2t.com.tashilatappprototype.ui.solde;
 
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import m2t.com.tashilatappprototype.adapter.SoldeAdapter;
-import m2t.com.tashilatappprototype.common.pojo.Account;
 import m2t.com.tashilatappprototype.R;
+import m2t.com.tashilatappprototype.adapter.SoldeAdapter;
+import m2t.com.tashilatappprototype.common.pojo.Merchant;
+import m2t.com.tashilatappprototype.common.utils.Utils;
 import m2t.com.tashilatappprototype.ui.MainActivity;
 
 /**
@@ -26,7 +29,7 @@ public class SoldeFragment extends Fragment {
     private RecyclerView recyclerView;
     private SoldeAdapter adapter;
 
-    private List<Account> accountsList;
+    private List<Merchant> accountsList;
 
     public SoldeFragment() {
         // Required empty public constructor
@@ -57,6 +60,12 @@ public class SoldeFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.mainmenu, menu);
+    }
     /**
      * Adding few accounts for testing
      */
@@ -67,13 +76,13 @@ public class SoldeFragment extends Fragment {
                 R.drawable.citibank
         };
 
-        Account a = new Account("Compte 1", 1332333214, 12313133f);
+        Merchant a = new Merchant("Compte 1", 1332333214, 12313133f);
         accountsList.add(a);
 
-        a = new Account("Compte 2", 1332333214, 12.33f);
+        a = new Merchant("Compte 2", 1332333214, 12.33f);
         accountsList.add(a);
 
-        a = new Account("Compte 3", 1332333214, 12121.43f);
+        a = new Merchant("Compte 3", 1332333214, 12121.43f);
         accountsList.add(a);
 
 

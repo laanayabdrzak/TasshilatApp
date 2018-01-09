@@ -1,0 +1,103 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="m2t.com.tashilatappprototype.ui.dashboard.DashboardFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_darker"
+            android:padding="12dp"
+            android:orientation="vertical">
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_aero"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                />
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent">
+
+                <TableRow>
+                    <TextView
+                        android:text="Solde"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:textSize="@dimen/account_title"
+                        android:layout_column="1" />
+
+                    <TextView
+                        android:text="12, 000 DHs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/account_title"
+                        android:layout_column="1" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent">
+
+                    <TextView
+                        android:text="Solde a temps réelle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/songs_count"
+                        android:textColor="@color/gray_aero"
+                        android:layout_marginRight="10dp"
+                        android:layout_column="1" />
+
+                    <TextView
+                        android:text="12, 000 DHs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray_aero"
+                        android:textSize="@dimen/songs_count"
+                        android:layout_column="2" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_multiline_chart_black_24dp"
+                        />
+
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpPager"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:layout_weight="1">
+
+            <android.support.v4.view.PagerTabStrip
+                android:id="@+id/pager_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:textColor="@color/primary_darker"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp" />
+
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+</FrameLayout>

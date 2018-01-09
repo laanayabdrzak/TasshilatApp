@@ -1,9 +1,9 @@
 package m2t.com.tashilatappprototype.ui.home;
 
-import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,22 +21,21 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.adapter.FavouriteAdapter;
 import m2t.com.tashilatappprototype.adapter.HomeAccountAdapter;
 import m2t.com.tashilatappprototype.adapter.InvoiceAdapter;
-import m2t.com.tashilatappprototype.common.pojo.Account;
-import m2t.com.tashilatappprototype.common.pojo.Favourite;
 import m2t.com.tashilatappprototype.common.pojo.Invoice;
-import m2t.com.tashilatappprototype.R;
-import m2t.com.tashilatappprototype.ui.configureOperator.ConfigureOperatorFragment;
+import m2t.com.tashilatappprototype.common.pojo.Merchant;
 import m2t.com.tashilatappprototype.ui.MainActivity;
+import m2t.com.tashilatappprototype.ui.configureOperator.ConfigureOperatorFragment;
 
 public class HomeFragment extends Fragment
 		implements InvoiceAdapter.OnCardClickListner, FavouriteAdapter.OnCardClickListner {
 
 	private RecyclerView listView, listviewCompte, collectionView;
 	private PieChart mChart;
-    private List<Favourite> favouriteItems;
+    private List<Merchant> favouriteItems;
 
 	public HomeFragment() {
 		super();
@@ -78,12 +77,7 @@ public class HomeFragment extends Fragment
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         favouriteItems = new ArrayList();
-		favouriteItems.add(new Favourite("Lydec", R.drawable.b0001));
-		favouriteItems.add(new Favourite("Redal", R.drawable.b0002));
-		favouriteItems.add(new Favourite("Amanty", R.drawable.b0004));
-		favouriteItems.add(new Favourite("CTM", R.drawable.b0006));
-		favouriteItems.add(new Favourite("IAM", R.drawable.b0007));
-		favouriteItems.add(new Favourite("IAM", R.drawable.b0007));
+
 
 		FavouriteAdapter favouriteAdapter = new FavouriteAdapter(getActivity(), favouriteItems);
 		favouriteAdapter.setOnCardClickListner(this);
@@ -104,21 +98,21 @@ public class HomeFragment extends Fragment
 		listView.setLayoutManager(llm);
 		listView.setAdapter(invoiceAdapter);
 
-        List<Account> accItems = new ArrayList<>();
+        List<Merchant> accItems = new ArrayList<>();
 
-        Account a ;
+        Merchant a ;
 
-        a = new Account();
+        a = new Merchant();
         a.setUan(000000122);
         a.setSolde(121.2121f);
         accItems.add(a);
 
-        a = new Account();
+        a = new Merchant();
         a.setUan(000000132);
         a.setSolde(331.2121f);
         accItems.add(a);
 
-        a = new Account();
+        a = new Merchant();
         a.setUan(000000135);
         a.setSolde(631.2121f);
         accItems.add(a);
@@ -153,12 +147,11 @@ public class HomeFragment extends Fragment
 	public void OnCardClicked(View view, int position) {
 		if (view.getParent() == collectionView) {
             int itemPosition = collectionView.getChildLayoutPosition(view);
-            Favourite item = favouriteItems.get(itemPosition);
+            Merchant item = favouriteItems.get(itemPosition);
 
             Fragment fragment = new ConfigureOperatorFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("logo_operator",String.valueOf(item.getIcon()));
-            bundle.putString("title_operator",item.getTitle());
+
             fragment.setArguments(bundle);
 			getFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
 					.commit();

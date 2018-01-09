@@ -1,5 +1,9 @@
 package m2t.com.tashilatappprototype.data.remote;
 
+import m2t.com.tashilatappprototype.common.pojo.CodeCenReq;
+import m2t.com.tashilatappprototype.common.pojo.CodeCenRes;
+import m2t.com.tashilatappprototype.common.pojo.EncaisseRequest;
+import m2t.com.tashilatappprototype.common.pojo.EncaisseResponse;
 import m2t.com.tashilatappprototype.common.pojo.FacturieRequest;
 import m2t.com.tashilatappprototype.common.pojo.FacturieResponse;
 import m2t.com.tashilatappprototype.common.pojo.LogOutResponse;
@@ -28,5 +32,11 @@ public interface ApiInterface {
 
     @POST("/getListFactures")
     Call<FacturieResponse> getListFactures(@Body FacturieRequest facturieRequest, @Header("Cookie") String cookie);
+
+    @POST("/encaisser")
+    Call<EncaisseResponse> encaisserFacture(@Body EncaisseRequest encaisseFacture, @Header("Cookie") String cookie);
+
+    @POST("/getParams")
+    Call<CodeCenRes> getCodeCenter(@Body CodeCenReq codeCenReq, @Header("Cookie") String cookie);
 
 }

@@ -467,4 +467,46 @@ public class Facture implements Parcelable {
         parcel.writeByte((byte) (obligatoire == null ? 0 : obligatoire ? 1 : 2));
         parcel.writeInt(seq);
     }
+
+    @Override
+    public String toString() {
+        return "Facture{" +
+                "idFacture='" + idFacture + '\'' +
+                ", merchantId='" + merchantId + '\'' +
+                ", numEcheance='" + numEcheance + '\'' +
+                ", type='" + type + '\'' +
+                ", designationType='" + designationType + '\'' +
+                ", produit='" + produit + '\'' +
+                ", localId='" + localId + '\'' +
+                ", numLigne='" + numLigne + '\'' +
+                ", description='" + description + '\'' +
+                ", echeance='" + echeance + '\'' +
+                ", dateLimite='" + dateLimite + '\'' +
+                ", date='" + date + '\'' +
+                ", numContrat='" + numContrat + '\'' +
+                ", reference='" + reference + '\'' +
+                ", tournee='" + tournee + '\'' +
+                ", numClient='" + numClient + '\'' +
+                ", nomClient='" + nomClient + '\'' +
+                ", cin='" + cin + '\'' +
+                ", tel='" + tel + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", compteur='" + compteur + '\'' +
+                ", mntHt='" + mntHt + '\'' +
+                ", mntTVA='" + mntTVA + '\'' +
+                ", mntTimbre='" + mntTimbre + '\'' +
+                ", mntPenalite='" + mntPenalite + '\'' +
+                ", mntMaj='" + mntMaj + '\'' +
+                ", mntTTC='" + mntTTC + '\'' +
+                ", mntAvance='" + mntAvance + '\'' +
+                ", mntFrais='" + mntFrais + '\'' +
+                ", mntFraisTva='" + mntFraisTva + '\'' +
+                ", mntFraisHt='" + mntFraisHt + '\'' +
+                ", mntFraisTimbre='" + mntFraisTimbre + '\'' +
+                ", obligatoire=" + obligatoire +
+                ", attachement=" + attachement +
+                ", seq=" + seq +
+                ", extra=" + extra +
+                '}';
+    }
 }

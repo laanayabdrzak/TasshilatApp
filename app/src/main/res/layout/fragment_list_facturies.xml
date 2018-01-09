@@ -4,35 +4,9 @@
     android:layout_height="match_parent"
     tools:context="m2t.com.tashilatappprototype.ui.listFacturies.ListFacturiesFragment">
 
-    <TableLayout
-        android:id="@+id/table_facture"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TableRow
-            android:background="#607D8B"
-            android:padding="5dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Date Limite" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Date Echéance" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Montant" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Local" />
-        </TableRow>
-    </TableLayout>
-
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 </FrameLayout>
