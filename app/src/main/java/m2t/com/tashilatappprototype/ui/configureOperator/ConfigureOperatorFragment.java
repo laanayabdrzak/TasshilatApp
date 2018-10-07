@@ -2,14 +2,21 @@ package m2t.com.tashilatappprototype.ui.configureOperator;
 
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -27,15 +34,16 @@ import java.util.List;
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.common.pojo.CodeCenReq;
 import m2t.com.tashilatappprototype.common.pojo.CodeCenRes;
-import m2t.com.tashilatappprototype.common.pojo.Facture;
 import m2t.com.tashilatappprototype.common.pojo.FacturieRequest;
 import m2t.com.tashilatappprototype.common.pojo.FacturieResponse;
+import m2t.com.tashilatappprototype.common.pojo.OperatorFAV;
 import m2t.com.tashilatappprototype.common.pojo.Param;
 import m2t.com.tashilatappprototype.common.pojo.Req;
 import m2t.com.tashilatappprototype.common.pojo.SearchForm;
 import m2t.com.tashilatappprototype.common.utils.SessionManager;
 import m2t.com.tashilatappprototype.common.utils.Utility;
 import m2t.com.tashilatappprototype.common.utils.Utils;
+import m2t.com.tashilatappprototype.data.local.DatabaseHandler;
 import m2t.com.tashilatappprototype.data.remote.ApiClient;
 import m2t.com.tashilatappprototype.data.remote.ApiInterface;
 import m2t.com.tashilatappprototype.ui.MainActivity;
@@ -58,12 +66,14 @@ public class ConfigureOperatorFragment extends Fragment implements AdapterView.O
     private Spinner spinnermodPaiement;
     private SearchableSpinner spinnerCodeCen;
     private EditText identifiantEdt;
-    SessionManager sessionManager;
+    private SessionManager sessionManager;
+    private DatabaseHandler db;
     private String valueSerachCrit;
     private String codeCenter;
     private String modPaiement;
     HashMap<String, String> data;
     List<String> list;
+    private boolean mToolBarNavigationFavorisListenerIsRegistered;
 
 
     public ConfigureOperatorFragment() {
@@ -76,7 +86,13 @@ public class ConfigureOperatorFragment extends Fragment implements AdapterView.O
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_configure_operator, container, false);
         ((MainActivity) getActivity()).enableViews(true);
-        ((MainActivity) getActivity()).setActionBarTitle(R.string.conf_oper_title);
+        setHasOptionsMenu(true);
+        ((MainActivity) getActivity()).setActionBarTitle(R.string.conf_oper_title, R.color.secondColor);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getActivity().getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.secondColor));
+        }
         imgOperator = (ImageView) rootView.findViewById(R.id.img_operator);
         titleLogo = (TextView) rootView.findViewById(R.id.title_logo);
         identifiantEdt = (EditText) rootView.findViewById(R.id.input_identifiant);
@@ -85,6 +101,7 @@ public class ConfigureOperatorFragment extends Fragment implements AdapterView.O
         spinnermodPaiement = (Spinner) rootView.findViewById(R.id.mod_paiement_spinner);
         spinnerCodeCen = (SearchableSpinner) rootView.findViewById(R.id.code_centre_spinner);
         sessionManager = new SessionManager(getActivity().getApplicationContext());
+        db = new DatabaseHandler(getActivity().getApplicationContext());
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.type_identifiant_array, android.R.layout.simple_spinner_item);
@@ -116,17 +133,47 @@ public class ConfigureOperatorFragment extends Fragment implements AdapterView.O
             }
         });
 
-        if (getArguments() != null && !getArguments().getString("logo_operator").trim().equals("")) {
+        if (getArguments() != null && !getArguments().getString("logo_operator").trim().equals("")
+                && getArguments().getString("flag").equals("new")) {
+
+            mToolBarNavigationFavorisListenerIsRegistered = false;
             int id = getActivity().getResources().getIdentifier("b" + getArguments().getString("logo_operator"),
                     "drawable", getActivity().getPackageName());
 
             if (id != 0) imgOperator.setImageResource(id);
             titleLogo.setText(getArguments().getString("title_operator"));
 
-            if (getArguments().get("logo_operator").equals("0013"))
+            if (getArguments().get("logo_operator").equals("0013")) {
                 spinnerCodeCen.setVisibility(View.VISIBLE);
                 rootView.findViewById(R.id.tv_code_centre).setVisibility(View.VISIBLE);
                 getCodeCenter();
+            }
+        }
+
+        if (getArguments() != null && !getArguments().getString("logo_operator").trim().equals("")
+                && getArguments().getString("flag").equals("favoris")) {
+
+            int id = getActivity().getResources().getIdentifier("b" + getArguments().getString("logo_operator"),
+                    "drawable", getActivity().getPackageName());
+            mToolBarNavigationFavorisListenerIsRegistered = true;
+            if (id != 0) imgOperator.setImageResource(id);
+            titleLogo.setText(getArguments().getString("title_operator"));
+
+            if (getArguments().getString("modPaiement").equals("ESPECE"))
+                spinnermodPaiement.setSelection(0);
+            else spinnermodPaiement.setSelection(1);
+
+            identifiantEdt.setText(getArguments().getString("ident"));
+            if (getArguments().getString("identType").equals("6"))
+                spinnerTypeId.setSelection(0);
+            else if (getArguments().getString("identType").equals("7"))
+                spinnerTypeId.setSelection(1);
+            else if (getArguments().getString("identType").equals("3"))
+                spinnerTypeId.setSelection(2);
+            else if (getArguments().getString("identType").equals("4"))
+                spinnerTypeId.setSelection(3);
+            else if (getArguments().getString("identType").equals("1"))
+                spinnerTypeId.setSelection(4);
         }
 
         validateBtn.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +181,6 @@ public class ConfigureOperatorFragment extends Fragment implements AdapterView.O
             public void onClick(View view) {
                 if (validate())
                     getListFactures();
-                //getFakeListFacture();
             }
         });
 
@@ -142,9 +188,45 @@ public class ConfigureOperatorFragment extends Fragment implements AdapterView.O
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_add).setVisible(false);
+        menu.findItem(R.id.action_log_out).setVisible(true);
+        menu.findItem(R.id.action_favoris).setVisible(true);
+        if (getArguments().getString("flag").equals("new")) menu.getItem(1).setIcon(ContextCompat.getDrawable(this.getActivity(), R.drawable.ic_favorite_border_black_24dp));
+        else menu.getItem(1).setIcon(ContextCompat.getDrawable(this.getActivity(), R.drawable.ic_favorite_black_24dp));
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_favoris:
+                if (!mToolBarNavigationFavorisListenerIsRegistered) {
+                    item.setIcon(ContextCompat.getDrawable(this.getActivity(), R.drawable.ic_favorite_black_24dp));
+                    addTofavorite();
+                    mToolBarNavigationFavorisListenerIsRegistered = true;
+                } else {
+                    item.setIcon(ContextCompat.getDrawable(this.getActivity(), R.drawable.ic_favorite_border_black_24dp));
+                    deleteFromFavoris(getArguments().getString("logo_operator"));
+                    mToolBarNavigationFavorisListenerIsRegistered = false;
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((MainActivity) getActivity()).setDrawerLocked(false);
+
     }
 
     public boolean validate() {
@@ -162,6 +244,22 @@ public class ConfigureOperatorFragment extends Fragment implements AdapterView.O
         return valid;
     }
 
+    private void addTofavorite() {
+        OperatorFAV operatorFAV = new OperatorFAV();
+        operatorFAV.setID_OPER(getArguments().getString("logo_operator"));
+        operatorFAV.setName(getArguments().getString("title_operator"));
+        operatorFAV.setIdent(identifiantEdt.getText().toString());
+        operatorFAV.setPayment(modPaiement);
+        operatorFAV.setTypeIdent(valueSerachCrit);
+        operatorFAV.setFavorite(1);
+
+        db.addOperatorFAV(operatorFAV);
+    }
+
+    private void deleteFromFavoris(String opID) {
+        db.deleteOperatorFAV(opID);
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Spinner spinner = (Spinner) adapterView;
@@ -171,7 +269,7 @@ public class ConfigureOperatorFragment extends Fragment implements AdapterView.O
             codeCenter = list.get(i);//data.get(i);
         } else if (spinner.getId() == R.id.mod_paiement_spinner) {
             modPaiement = getResources().getStringArray(R.array.mod_paiement_array)[i];
-            Toast.makeText(getActivity(), modPaiement, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), modPaiement, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -193,7 +291,7 @@ public class ConfigureOperatorFragment extends Fragment implements AdapterView.O
         HashMap<String, String> user = sessionManager.getUserDetails();
         final FacturieRequest req = new FacturieRequest();
         SearchForm searchForm = new SearchForm();
-        searchForm.setCodecentre("S62000");
+        searchForm.setCodecentre("4W1");
         searchForm.setSearchCrit(valueSerachCrit);
         switch (Integer.parseInt(valueSerachCrit)) {
 
@@ -297,45 +395,5 @@ public class ConfigureOperatorFragment extends Fragment implements AdapterView.O
                 progressDialog.dismiss();
             }
         });
-    }
-
-    private void getFakeListFacture() {
-                List<Facture> list = new ArrayList<>();
-                Facture f1 = new Facture();
-                f1.setAdresse("111");
-                f1.setMntFraisHt("111");
-                f1.setDateLimite("111");
-                f1.setEcheance("03.93.99");
-                list.add(f1);
-
-                Facture f2 = new Facture();
-                f2.setAdresse("222");
-                f2.setMntFraisHt("222");
-                f2.setDateLimite("222");
-                f2.setEcheance("222");
-                list.add(f2);
-
-                Facture f3 = new Facture();
-                f3.setAdresse("333");
-                f3.setMntFraisHt("333");
-                f3.setDateLimite("333");
-                f3.setEcheance("333");
-                list.add(f3);
-
-                Facture f4 = new Facture();
-                f4.setAdresse("444");
-                f4.setMntFraisHt("444");
-                f4.setDateLimite("444");
-                f4.setEcheance("444");
-                list.add(f4);
-
-                Fragment fragment = new ListFacturiesFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("logo_operator", getArguments().getString("logo_operator"));
-                bundle.putString("title_operator", getArguments().getString("title_operator"));
-                bundle.putParcelableArrayList("facturie_list", (ArrayList<? extends Parcelable>) list);
-                bundle.putString("value", "Test value");
-                fragment.setArguments(bundle);
-                Utility.replaceFragement(fragment, getActivity());
     }
 }

@@ -4,6 +4,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.changePwd.ChangePwdFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -16,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
+            android:visibility="gone"
             android:layout_gravity="center_horizontal" />
 
 
@@ -67,10 +71,10 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:background="@color/color_primary"
-            android:textColor="@color/iron"
+            android:background="@color/fourthColor"
+            android:textColor="@color/white"
             android:text="Reset"/>
 
     </LinearLayout>
-
+    </ScrollView>
 </FrameLayout>

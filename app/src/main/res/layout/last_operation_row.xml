@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/icon_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_list_row"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingLeft="?listPreferredItemPaddingLeft"
+    android:paddingRight="?listPreferredItemPaddingRight">
+
+
+    <RelativeLayout
+        android:id="@+id/container_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/corner_layout_radius_facture_item">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:padding="16dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_library_books_black_24dp" />
+
+        <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/from"
+            android:layout_alignParentRight="true"
+            android:padding="16dp"
+            android:text="12/12/2017"
+            android:textAppearance="@style/TextAppearance.date_item"/>
+
+        <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/icon"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="RADEEJ"
+            android:textAppearance="@style/TextAppearance.title_text_item"/>
+
+        <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
+            android:id="@+id/ref"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_below="@id/from"
+            android:visibility="gone"
+            android:layout_toRightOf="@id/divider_view"
+            android:ellipsize="end"
+            android:text="Contrat N° 232, echeance 3233, Penalite:343 facture à payer d'un montant total "
+            android:textAppearance="@style/TextAppearance.subtext_item"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

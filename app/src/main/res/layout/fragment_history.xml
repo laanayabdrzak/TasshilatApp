@@ -15,7 +15,8 @@
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/chart1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"/>
 
     </LinearLayout>
 
@@ -26,12 +27,13 @@
         android:layout_margin="6dp"
         android:layout_weight="1"
         android:background="@drawable/round_corners"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:visibility="invisible">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </LinearLayout>

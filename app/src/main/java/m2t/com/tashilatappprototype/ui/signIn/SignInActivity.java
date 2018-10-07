@@ -3,9 +3,11 @@ package m2t.com.tashilatappprototype.ui.signIn;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,6 +44,7 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setContentView(R.layout.activity_sign_in);
         emailText = (EditText) findViewById(R.id.input_email);
         passwordText = (EditText) findViewById(R.id.input_password);
@@ -108,9 +111,15 @@ public class SignInActivity extends AppCompatActivity {
                 ApiClient.getClient().create(ApiInterface.class);
         Call<LogInResponse> call = apiService.setLogIn(new User(email, password), token);
         call.enqueue(new Callback<LogInResponse>() {
+            @NonNull
             @Override
             public void onResponse(Call<LogInResponse> call, Response<LogInResponse> response) {
-                if (response.body().getCoderet().equals("0")) {
+
+                Log.d("ERROOR", response.toString());
+                if (response.body().getCoderet()!= null && response.body().getCoderet().equals("600")) {
+                    Toast.makeText(getApplicationContext(), "Une erreur s'est produite merci de reessayer plus tard !",
+                            Toast.LENGTH_LONG).show();
+                } else if (response.body().getCoderet()!= null && response.body().getCoderet().equals("0")) {
                     sessionManager.createLoginSession(response.headers().get("Set-Cookie").split(";")[0],
                             response.body().getCodeES(),
                             response.body().getTokenCSFR(),

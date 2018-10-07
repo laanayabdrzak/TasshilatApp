@@ -26,7 +26,7 @@ public class DepotFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_depot, container, false);
         ((MainActivity) getActivity()).enableViews(false);
-        ((MainActivity) getActivity()).setActionBarTitle(R.string.depot_title);
+        //((MainActivity) getActivity()).setActionBarTitle(R.string.depot_title);
 
         return rootView;
     }

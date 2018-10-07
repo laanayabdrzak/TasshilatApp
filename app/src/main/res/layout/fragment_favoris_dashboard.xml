@@ -38,7 +38,22 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/collection_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#EBF1F9"
+            android:visibility="visible"/>
+
+        <LinearLayout
+            android:id="@+id/tv_no_favoris_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Aucun favoris ajouter"/>
+        </LinearLayout>
 
     </LinearLayout>
 

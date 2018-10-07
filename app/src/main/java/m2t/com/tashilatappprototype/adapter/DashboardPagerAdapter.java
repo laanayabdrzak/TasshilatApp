@@ -16,7 +16,7 @@ import m2t.com.tashilatappprototype.ui.dashboard.OperationFragment;
 public class DashboardPagerAdapter extends FragmentPagerAdapter {
 
     private static int NUM_ITEMS = 3;
-    private String tabTitles[] = new String[] { "Operations", "Comptes", "Favoris" };
+    private String tabTitles[] = new String[] { "Operations", "Statistiques", "Favoris" };
 
 
     public DashboardPagerAdapter(FragmentManager fm) {

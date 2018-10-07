@@ -17,8 +17,7 @@ import java.util.List;
 
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.adapter.SoldeAdapter;
-import m2t.com.tashilatappprototype.common.pojo.Merchant;
-import m2t.com.tashilatappprototype.common.utils.Utils;
+import m2t.com.tashilatappprototype.common.pojo.Balance;
 import m2t.com.tashilatappprototype.ui.MainActivity;
 
 /**
@@ -29,19 +28,28 @@ public class SoldeFragment extends Fragment {
     private RecyclerView recyclerView;
     private SoldeAdapter adapter;
 
-    private List<Merchant> accountsList;
+    private List<Balance> accountsList;
 
     public SoldeFragment() {
         // Required empty public constructor
     }
 
+    // newInstance constructor for creating fragment with arguments
+    public static SoldeFragment newInstance(int page, String title) {
+        SoldeFragment  fifth = new SoldeFragment ();
+        Bundle args = new Bundle();
+        args.putInt("someInt", page);
+        args.putString("someTitle", title);
+        fifth.setArguments(args);
+        return fifth;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_solde, container, false);
         ((MainActivity) getActivity()).enableViews(false);
-        ((MainActivity) getActivity()).setActionBarTitle(R.string.solde_title);
+       // ((MainActivity) getActivity()).setActionBarTitle(R.string.solde_title);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         accountsList = new ArrayList<>();
@@ -70,19 +78,13 @@ public class SoldeFragment extends Fragment {
      * Adding few accounts for testing
      */
     private void prepareAccounts() {
-        int[] covers = new int[]{
-                R.drawable.cihbank,
-                R.drawable.cihbank,
-                R.drawable.citibank
-        };
-
-        Merchant a = new Merchant("Compte 1", 1332333214, 12313133f);
+        Balance a = new Balance("Compte 1", "1332333214", 0, "1200,00 DH");
         accountsList.add(a);
 
-        a = new Merchant("Compte 2", 1332333214, 12.33f);
+        a = new Balance("Compte 2", "1332333214", 1,"5000, 00 DH");
         accountsList.add(a);
 
-        a = new Merchant("Compte 3", 1332333214, 12121.43f);
+        a = new Balance("Compte 3", "1332333214", 1, "12121,43 DH");
         accountsList.add(a);
 
 

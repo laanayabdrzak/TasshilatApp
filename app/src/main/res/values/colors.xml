@@ -9,6 +9,7 @@
     <color name="gray_aero">#DCDCDC</color>
     <color name="jet">#222222</color>
     <color name="oil">#333333</color>
+    <color name="background_light">#fafafa</color> <!-- grey 50 -->
     <color name="monsoon">#777777</color>
     <color name="jumbo">#888888</color>
     <color name="aluminum">#999999</color>
@@ -24,4 +25,30 @@
     <color name="row_activated">#e0e0e0</color>
     <color name="bg_action_mode">#757575</color>
     <color name="bg_circle_default">#666666</color>
+
+    <color name="firstColor">#faa613</color>
+    <color name="secondColor">#3bb273</color>
+    <color name="thirdColor">#4d9de0</color>
+    <color name="fourthColor">#e15554</color>
+    <color name="fifthColor">#7768ae</color>
+
+
+    <color name="text_secondary_dark">#8a000000</color>
+    <color name="mid_grey">#40808080</color>
+    <color name="background_super_dark">#ff292929</color>
+    <color name="scrim">#99323232</color>
+    <color name="hint_disabled_dark">#43000000</color> <!-- 26% black -->
+
+
+    <color name="designer_news_super_dark">#000133</color>
+    <color name="designer_news_quote_line">#ffeceef1</color>
+    <color name="designer_news_quote">#73000000</color>
+
+
+    <!-- designer news -->
+    <color name="background_dark">#ff333333</color>
+    <color name="designer_news">#03a9f4</color> <!--light blue 500 -->-->
+    <color name="designer_news_dark">#039be5</color> <!-- light blue 600 -->
+    <color name="designer_news_link_highlight">#b303a9f4</color>
+    <color name="designer_news_story_comment_background">@android:color/transparent</color>
 </resources>

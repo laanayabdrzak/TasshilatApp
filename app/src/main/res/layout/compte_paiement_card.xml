@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/firstColor"
+    android:layout_margin="@dimen/card_margin"
+    android:elevation="3dp"
+    card_view:cardCornerRadius="@dimen/card_account_radius">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/b0001"
+            android:layout_marginRight="8dp" />
+
+        <!-- account Number -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/thumbnail"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:gravity="center"
+            android:text="123412341234"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Date ValidaYou can now re-deem code at ATM, POS or WEB. Keep code securelytion Container -->
+        <LinearLayout
+            android:id="@+id/container_valid_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginTop="16dip"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Since"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/dateSubr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="06 / 16"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <!-- Account  Type -->
+        <TextView
+            android:id="@+id/accType"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/container_valid_date"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="60dp"
+            android:gravity="right"
+            android:layout_toRightOf="@+id/container_valid_date"
+            android:text="PREPAID"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/genre" />
+
+        <!-- account State -->
+        <TextView
+            android:id="@+id/accState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="2008"
+            android:visibility="gone"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/year" />
+        <ImageView
+            android:id="@+id/acc_status"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

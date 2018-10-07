@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.github.mikephil.charting.charts.PieChart;
 
@@ -20,7 +21,7 @@ import java.util.List;
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.adapter.FavouriteAdapter;
 import m2t.com.tashilatappprototype.common.pojo.Merchant;
-import m2t.com.tashilatappprototype.common.pojo.Operator;
+import m2t.com.tashilatappprototype.common.pojo.OperatorFAV;
 import m2t.com.tashilatappprototype.common.utils.Utility;
 import m2t.com.tashilatappprototype.data.local.DatabaseHandler;
 import m2t.com.tashilatappprototype.ui.configureOperator.ConfigureOperatorFragment;
@@ -35,6 +36,7 @@ public class FavorisDashboardFragment extends Fragment implements FavouriteAdapt
     private PieChart mChart;
     private int page;
     private RecyclerView collectionView;
+    private LinearLayout containerNofavoris;
     private FavouriteAdapter favouriteAdapter;
     private List<Merchant> merchantList;
     private DatabaseHandler db;
@@ -68,6 +70,7 @@ public class FavorisDashboardFragment extends Fragment implements FavouriteAdapt
         View rootView = inflater.inflate(R.layout.fragment_favoris_dashboard, container, false);
 
         collectionView = (RecyclerView) rootView.findViewById(R.id.collection_view);
+        containerNofavoris = (LinearLayout) rootView.findViewById(R.id.tv_no_favoris_container);
 
         merchantList = new ArrayList();
         db = new DatabaseHandler(getActivity().getApplicationContext());
@@ -80,6 +83,13 @@ public class FavorisDashboardFragment extends Fragment implements FavouriteAdapt
 
         prepareAccounts();
 
+        if (favouriteAdapter.getItemCount() == 0) {
+            collectionView.setVisibility(View.GONE);
+            containerNofavoris.setVisibility(View.VISIBLE);
+        } else {
+            collectionView.setVisibility(View.VISIBLE);
+            containerNofavoris.setVisibility(View.GONE);
+        }
         return rootView;
     }
 
@@ -99,20 +109,28 @@ public class FavorisDashboardFragment extends Fragment implements FavouriteAdapt
             Bundle bundle = new Bundle();
             bundle.putString("logo_operator", item.getThumbnail());
             bundle.putString("title_operator", item.getName());
+            bundle.putString("flag", "favoris");
+            bundle.putString("ident", item.getIdent());
+            bundle.putString("identType", item.getTypeIdent());
+            bundle.putString("modPaiement", item.getModPaiement());
+
             fragment.setArguments(bundle);
             Utility.replaceFragement(fragment, getActivity());
-
         }
     }
 
     private void prepareAccounts() {
         Merchant merchant;
-        for (Operator op :db.getAllOperators()) {
+        for (OperatorFAV op :db.getAllOperatorsFAV()) {
             if (op.getFavorite() == 1) {
                 merchant = new Merchant();
                 merchant.setName(op.getName());
                 merchant.setThumbnail(op.getID_OPER());
-                Log.d(TAG, "name : " + merchant.getName() + " id : " + merchant.getThumbnail());
+                merchant.setIdent(op.getIdent());
+                merchant.setTypeIdent(op.getTypeIdent());
+                merchant.setModPaiement(op.getPayment());
+                Log.d(TAG, "name : " + merchant.getName() + " id : " + merchant.getThumbnail()
+                + "ident : " + merchant.getIdent() + " type : " + merchant.getTypeIdent());
                 merchantList.add(merchant);
             }
         }

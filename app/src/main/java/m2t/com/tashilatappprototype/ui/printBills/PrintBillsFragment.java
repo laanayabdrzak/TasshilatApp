@@ -55,9 +55,9 @@ public class PrintBillsFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_print_bills, container, false);
         ((MainActivity) getActivity()).enableViews(true);
-        ((MainActivity) getActivity()).setActionBarTitle(R.string.facture_title);
-        imgOperator = (ImageView) rootView.findViewById(R.id.logo_operator);
-        titleOperator = (TextView) rootView.findViewById(R.id.operator_name);
+        ((MainActivity) getActivity()).setActionBarTitle(R.string.facture_title, R.color.secondColor);
+        imgOperator = rootView.findViewById(R.id.logo_operator);
+        titleOperator = rootView.findViewById(R.id.operator_name);
 
         if (getArguments() != null && !getArguments().getString("logo_operator").trim().equals("")) {
             imgOperator.setImageResource(Integer.valueOf(getArguments().getString("logo_operator")));

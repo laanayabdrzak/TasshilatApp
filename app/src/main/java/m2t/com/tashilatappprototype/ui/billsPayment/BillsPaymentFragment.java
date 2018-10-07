@@ -39,9 +39,19 @@ public class BillsPaymentFragment extends Fragment implements AccountPaymentAdap
     private static final String TAG = BillsPaymentFragment.class.getSimpleName();
     private RecyclerView recyclerView;
     private AccountPaymentAdapter adapter;
-    private Fragment fragment;
     private List<Merchant> merchantList;
     private DatabaseHandler db;
+
+
+    // newInstance constructor for creating fragment with arguments
+    public static BillsPaymentFragment newInstance(int page, String title) {
+        BillsPaymentFragment  first = new BillsPaymentFragment ();
+        Bundle args = new Bundle();
+        args.putInt("someInt", page);
+        args.putString("someTitle", title);
+        first.setArguments(args);
+        return first;
+    }
 
     public BillsPaymentFragment() {
         // Required empty public constructor
@@ -59,7 +69,7 @@ public class BillsPaymentFragment extends Fragment implements AccountPaymentAdap
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_bills_payment, container, false);
         ((MainActivity) getActivity()).enableViews(false);
-        ((MainActivity) getActivity()).setActionBarTitle(R.string.paiemnt_fac_title);
+        //((MainActivity) getActivity()).setActionBarTitle(R.string.paiemnt_fac_title);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         merchantList = new ArrayList<>();
@@ -72,30 +82,6 @@ public class BillsPaymentFragment extends Fragment implements AccountPaymentAdap
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        /**
-         * RecyclerView: Implementing single item click and long press (Part-II)
-         * */
-        /* recyclerView.addOnItemTouchListener (new RecyclerTouchListener(getActivity(),
-                recyclerView, new RecyclerTouchListener.ClickListener() {
-
-            @Override
-            public void onClick(View view, int position) {
-
-                int itemPosition = recyclerView.getChildLayoutPosition(view);
-                Merchant item = merchantList.get(itemPosition);
-                fragment = new ConfigureOperatorFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("logo_operator",item.getThumbnail());
-                bundle.putString("title_operator",item.getName());
-                fragment.setArguments(bundle);
-                Utils.replaceFragement(fragment, getActivity());
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "Ajouter aux favourites", Toast.LENGTH_LONG).show();
-            }
-        }));*/
         prepareAccounts();
 
         return rootView;
@@ -138,7 +124,7 @@ public class BillsPaymentFragment extends Fragment implements AccountPaymentAdap
     private void prepareAccounts() {
 
         Merchant merchant;
-        for (Operator op :db.getAllOperators()) {
+                for (Operator op :db.getOperatorByCategorie("Eau Et Electricite")) {
             merchant = new Merchant();
             merchant.setName(op.getName());
             merchant.setThumbnail(op.getID_OPER());
@@ -154,6 +140,10 @@ public class BillsPaymentFragment extends Fragment implements AccountPaymentAdap
         Bundle bundle = new Bundle();
         bundle.putString("logo_operator", merchant.getThumbnail());
         bundle.putString("title_operator", merchant.getName());
+        bundle.putString("flag", "new");
+        bundle.putString("ident", "");
+        bundle.putString("identType", "");
+        bundle.putString("modPaiement", "");
         fragment.setArguments(bundle);
         Utility.replaceFragement(fragment, getActivity());
     }

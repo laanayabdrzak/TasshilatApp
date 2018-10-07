@@ -1,23 +1,29 @@
 package m2t.com.tashilatappprototype.ui.dashboard;
 
 
+import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.adapter.DashboardPagerAdapter;
+import m2t.com.tashilatappprototype.common.pojo.Balance;
+import m2t.com.tashilatappprototype.common.utils.Utils;
 import m2t.com.tashilatappprototype.ui.MainActivity;
 
 /**
@@ -25,6 +31,9 @@ import m2t.com.tashilatappprototype.ui.MainActivity;
  */
 public class DashboardFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
+    private TextView solde;
+    private TextView soldeAtempsReelle;
+    private List<Balance> listCompt = new ArrayList<>();
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -35,22 +44,32 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Log.d("TAGG", "onCreateView");
-
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        ((MainActivity) getActivity()).enableViews(false);
-        ((MainActivity) getActivity()).setActionBarTitle(R.string.accueil_title);
+        //((MainActivity) getActivity()).enableViews(false);
+        ((MainActivity) getActivity()).setActionBarTitle(R.string.accueil_title, R.color.firstColor);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getActivity().getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.firstColor));
+        }
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         // Inflate the layout for this fragment
         // Initialize the ViewPager and set an adapter
         Spinner spinner = (Spinner) rootView.findViewById(R.id.spinner);
+        solde = (TextView) rootView.findViewById(R.id.solde);
+        soldeAtempsReelle = (TextView) rootView.findViewById(R.id.solde_a_temps_reelle);
         // Spinner click listener
         spinner.setOnItemSelectedListener(this);
 
+
+        listCompt.add(new Balance("Compte 1", "1111111", 0, "1200,00 DH"));
+        listCompt.add(new Balance("Compte 2", "1332333214", 0, "1300,00 DH"));
+        listCompt.add(new Balance("Compte 3", "1332333214", 0, "400,00 DH"));
         // Spinner Drop down elements
         List<String> comptes = new ArrayList<>();
-        comptes.add("Compte CHEQUE N°1");
-        comptes.add("Compte CHEQUE N°2");
-        comptes.add("Compte CHEQUE N°3");
+        comptes.add("Compte PAIEMENT N°1");
+        comptes.add("Compte PAIEMENT N°2");
+        comptes.add("Compte PAIEMENT N°3");
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, comptes);
@@ -87,23 +106,32 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
             }
         });
 
+        Utils.hideKeyboardFrom(getActivity(), rootView.findViewById(R.id.header_view));
+
         return rootView;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Log.d("TAGG", "onViewCreated");
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_add).setVisible(false);
+        menu.findItem(R.id.action_log_out).setVisible(true);
+        menu.findItem(R.id.action_favoris).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
 
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
+        solde.setText(listCompt.get(position).getSolde());
+        soldeAtempsReelle.setText(listCompt.get(position).getSolde());
 
-        // Showing selected spinner item
-        //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
     }
 
     @Override

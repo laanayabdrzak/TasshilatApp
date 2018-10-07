@@ -2,6 +2,7 @@ package m2t.com.tashilatappprototype.data.remote;
 
 import m2t.com.tashilatappprototype.common.pojo.CodeCenReq;
 import m2t.com.tashilatappprototype.common.pojo.CodeCenRes;
+import m2t.com.tashilatappprototype.common.pojo.ConsultationTrxReq;
 import m2t.com.tashilatappprototype.common.pojo.EncaisseRequest;
 import m2t.com.tashilatappprototype.common.pojo.EncaisseResponse;
 import m2t.com.tashilatappprototype.common.pojo.FacturieRequest;
@@ -38,5 +39,8 @@ public interface ApiInterface {
 
     @POST("/getParams")
     Call<CodeCenRes> getCodeCenter(@Body CodeCenReq codeCenReq, @Header("Cookie") String cookie);
+
+    @POST("/consultationTrx")
+    Call<String> getConsulationTrx(@Body ConsultationTrxReq consultationTrxReq , @Header("Cookie") String cookie);
 
 }

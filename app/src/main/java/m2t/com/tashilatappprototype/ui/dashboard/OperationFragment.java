@@ -12,12 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.adapter.InvoiceAdapter;
+import m2t.com.tashilatappprototype.adapter.LastOperationAdapter;
+import m2t.com.tashilatappprototype.common.pojo.ConsultationTrxReq;
 import m2t.com.tashilatappprototype.common.pojo.Invoice;
+import m2t.com.tashilatappprototype.common.utils.SessionManager;
 import m2t.com.tashilatappprototype.common.utils.Utils;
+import m2t.com.tashilatappprototype.data.remote.ApiClient;
+import m2t.com.tashilatappprototype.data.remote.ApiInterface;
+import retrofit2.Call;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,7 @@ public class OperationFragment extends Fragment implements InvoiceAdapter.OnCard
     private String title;
     private int page;
     private RecyclerView listView;
+    private SessionManager sessionManager;
 
     // newInstance constructor for creating fragment with arguments
     public static OperationFragment newInstance(int page, String title) {
@@ -47,6 +55,7 @@ public class OperationFragment extends Fragment implements InvoiceAdapter.OnCard
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         page = getArguments().getInt("someInt", 0);
         title = getArguments().getString("someTitle");
     }
@@ -59,14 +68,14 @@ public class OperationFragment extends Fragment implements InvoiceAdapter.OnCard
         View rootView = inflater.inflate(R.layout.fragment_operation, container, false);
         Utils.hideKeyboardFrom(getActivity(), rootView.findViewById(R.id.parent));
         listView = (RecyclerView) rootView.findViewById(R.id.list_view);
+        sessionManager = new SessionManager(getActivity().getApplicationContext());
         List<Invoice> invoiceItems = new ArrayList();
-        invoiceItems.add(new Invoice("N° 21344452", "231,55 Dhs", "Payé", "13 Aout 2017 13h05", R.drawable.b0006));
-        invoiceItems.add(new Invoice("N° 54665444", "60,65 Dhs", "Payé", "13 Aout 2017 13h05", R.drawable.b0011));
-        invoiceItems.add(new Invoice("N° 09554332", "342,09 Dhs", "Payé", "29 Juin 2017 12h33", R.drawable.b0007));
-        invoiceItems.add(new Invoice("N° 33456666", "603,12 Dhs", "Payé", "13 Aout 2017 22h57", R.drawable.b0004));
-        invoiceItems.add(new Invoice("N° 12322111", "14,06 Dhs", "Payé", "13 Aout 2017 09h11", R.drawable.b0009));
-        InvoiceAdapter invoiceAdapter = new InvoiceAdapter(getActivity(), invoiceItems);
-        invoiceAdapter.setOnCardClickListner(this);
+        invoiceItems.add(new Invoice("1 facture payer N° 21344452", "", "Facture(s) RADEEJ déjà", "13/01/2017", R.drawable.ic_library_books_black_24dp));
+        invoiceItems.add(new Invoice("Compte paiement N° 1", "", "Changement de status du compte de paiement", "13/04/2017", R.drawable.ic_credit_card_black_24dp));
+        invoiceItems.add(new Invoice("N° 09554332", "", "Facture(s) IAM", "29/04/2017", R.drawable.ic_library_books_black_24dp));
+        invoiceItems.add(new Invoice("Compte N°2", "", "Alimentation du compte ", "13/05/2017", R.drawable.ic_credit_card_black_24dp));
+        invoiceItems.add(new Invoice("1 facture payer N° 12322111", "", "Facture(s) ONEP", "13/06/2017", R.drawable.ic_library_books_black_24dp));
+        LastOperationAdapter invoiceAdapter = new LastOperationAdapter(getActivity(), invoiceItems);
         final LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         listView.setLayoutManager(llm);
         listView.setAdapter(invoiceAdapter);
@@ -74,14 +83,17 @@ public class OperationFragment extends Fragment implements InvoiceAdapter.OnCard
         return rootView;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Log.d(TAG,"onViewCreated");
-    }
 
     @Override
     public void OnCardClicked(View view, int position) {
 
+    }
+
+    private void getLastTrx() {
+        ApiInterface apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+        HashMap<String, String> user = sessionManager.getUserDetails();
+        Call<String> call = apiService.getConsulationTrx(new ConsultationTrxReq("21/09/2018","21/09/2018"), user.get(SessionManager.KEY_PHPSESSID) + ";"
+                + user.get(SessionManager.KEY_COOKIE));
     }
 }

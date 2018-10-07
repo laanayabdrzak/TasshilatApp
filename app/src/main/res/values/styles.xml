@@ -13,17 +13,18 @@
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="Theme.AppCompat.Light.DarkActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.Custom.ActionBar" parent="AppTheme">
+        <item name="android:background">@color/fifthColor</item>
+    </style>
     <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
-
         <item name="android:windowBackground">@color/color_primary</item>
-
         <item name="colorControlNormal">@color/iron</item>
         <item name="colorControlActivated">@color/white</item>
         <item name="colorControlHighlight">@color/white</item>
@@ -38,4 +39,7 @@
         <item name="android:textColorPrimary">@color/iron</item>
         <item name="android:background">@color/color_primary</item>
     </style>
+
+
+    
 </resources>

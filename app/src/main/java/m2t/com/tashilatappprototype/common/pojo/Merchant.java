@@ -9,6 +9,9 @@ public class Merchant {
     private String name;
     private int uan;
     private String thumbnail;
+    private String ident;
+    private String typeIdent;
+    private String modPaiement;
     private float solde;
     private Boolean isFavoris;
 
@@ -65,5 +68,29 @@ public class Merchant {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public String getIdent() {
+        return ident;
+    }
+
+    public void setIdent(String ident) {
+        this.ident = ident;
+    }
+
+    public String getTypeIdent() {
+        return typeIdent;
+    }
+
+    public void setTypeIdent(String typeIdent) {
+        this.typeIdent = typeIdent;
+    }
+
+    public String getModPaiement() {
+        return modPaiement;
+    }
+
+    public void setModPaiement(String modPaiement) {
+        this.modPaiement = modPaiement;
     }
 }

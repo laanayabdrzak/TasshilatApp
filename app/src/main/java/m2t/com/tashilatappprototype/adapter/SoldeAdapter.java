@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import m2t.com.tashilatappprototype.common.pojo.Merchant;
 import m2t.com.tashilatappprototype.R;
+import m2t.com.tashilatappprototype.common.pojo.Balance;
 
 /**
  * Created by laanaya on 8/11/17.
@@ -24,9 +24,9 @@ import m2t.com.tashilatappprototype.R;
 public class SoldeAdapter extends RecyclerView.Adapter<SoldeAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Merchant> merchantList;
+    private List<Balance> merchantList;
 
-    public SoldeAdapter(Context mContext, List<Merchant> merchantList) {
+    public SoldeAdapter(Context mContext, List<Balance> merchantList) {
         this.mContext = mContext;
         this.merchantList = merchantList;
     }
@@ -42,10 +42,12 @@ public class SoldeAdapter extends RecyclerView.Adapter<SoldeAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
-        Merchant acc = merchantList.get(position);
-        holder.title.setText(acc.getName());
-        holder.count.setText("UAN : " + acc.getUan());
+        Balance acc = merchantList.get(position);
+        holder.title.setText(acc.getTitle());
+        holder.count.setText("N° Compte : " + acc.getNumAcc());
         holder.solde.setText("Solde : " + acc.getSolde());
+        if (acc.getIsUp() == 1) holder.overflow.setImageResource(R.drawable.ic_arrow_drop_up_green_24dp);
+        else holder.overflow.setImageResource(R.drawable.ic_arrow_drop_down_red_24dp);
 
         // loading acc cover using Glide library
         /*Glide.with(mContext).load(acc.getThumbnail()).into(holder.thumbnail);

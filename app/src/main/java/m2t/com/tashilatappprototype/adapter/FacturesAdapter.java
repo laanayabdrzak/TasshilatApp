@@ -62,10 +62,9 @@ public class FacturesAdapter extends RecyclerView.Adapter<FacturesAdapter.MyView
         Facture facture = factures.get(position);
 
         // displaying text view data
-        holder.from.setText(facture.getProduit());
-        holder.subject.setText(facture.getDescription());
-        holder.message.setText(Utils.convertPrice(facture.getMntHt()) +"Dhs");
-
+        holder.from.setText("Facture(s) " + facture.getProduit() + " Disponible");
+        holder.subject.setText(facture.getDescription() + " facture à payer d'un montant total de "
+                + Utils.convertPrice(facture.getMntHt()) +"Dhs est disponible pour paiement.");
         holder.timestamp.setText(Utils.getDatefromString(facture.getDateLimite()));
 
 
@@ -76,16 +75,16 @@ public class FacturesAdapter extends RecyclerView.Adapter<FacturesAdapter.MyView
         holder.itemView.setActivated(selectedItems.get(position, false));
 
         // change the font style depending on facture read status
-        applyReadStatus(holder, facture);
+        //applyReadStatus(holder, facture);
 
         // handle facture star
-        applyImportant(holder, facture);
+        //applyImportant(holder, facture);
 
         // handle icon animation
-        applyIconAnimation(holder, position);
+        //applyIconAnimation(holder, position);
 
         // display profile image
-        applyProfilePicture(holder, facture);
+        //applyProfilePicture(holder, facture);
 
         // apply click events
         applyClickEvents(holder, position);
@@ -99,28 +98,28 @@ public class FacturesAdapter extends RecyclerView.Adapter<FacturesAdapter.MyView
             }
         });
 
-        holder.iconImp.setOnClickListener(new View.OnClickListener() {
+        /*holder.iconImp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onIconImportantClicked(position);
             }
-        });
+        });*/
 
-        holder.messageContainer.setOnClickListener(new View.OnClickListener() {
+       /* holder.messageContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onFactureRowClicked(position);
             }
-        });
+        });*/
 
-        holder.messageContainer.setOnLongClickListener(new View.OnLongClickListener() {
+        /*holder.messageContainer.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 listener.onRowLongClicked(position);
                 view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                 return true;
             }
-        });
+        });*/
     }
 
     @Override
@@ -129,8 +128,8 @@ public class FacturesAdapter extends RecyclerView.Adapter<FacturesAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
-        public TextView from, subject, message, iconText, timestamp;
-        public ImageView iconImp, imgProfile;
+        public TextView from, subject, timestamp;
+        public ImageView iconImp;
         public LinearLayout messageContainer;
         public RelativeLayout iconContainer, iconBack, iconFront;
 
@@ -138,14 +137,13 @@ public class FacturesAdapter extends RecyclerView.Adapter<FacturesAdapter.MyView
             super(view);
             from = (TextView) view.findViewById(R.id.from);
             subject = (TextView) view.findViewById(R.id.txt_primary);
-            message = (TextView) view.findViewById(R.id.txt_secondary);
-            iconText = (TextView) view.findViewById(R.id.icon_text);
+            //iconText = (TextView) view.findViewById(R.id.icon_text);
             timestamp = (TextView) view.findViewById(R.id.timestamp);
-            iconBack = (RelativeLayout) view.findViewById(R.id.icon_back);
-            iconFront = (RelativeLayout) view.findViewById(R.id.icon_front);
+            //iconBack = (RelativeLayout) view.findViewById(R.id.icon_back);
+            //iconFront = (RelativeLayout) view.findViewById(R.id.icon_front);
             iconImp = (ImageView) view.findViewById(R.id.icon_star);
-            imgProfile = (ImageView) view.findViewById(R.id.icon_profile);
-            messageContainer = (LinearLayout) view.findViewById(R.id.message_container);
+            //imgProfile = (ImageView) view.findViewById(R.id.icon_profile);
+            //messageContainer = (LinearLayout) view.findViewById(R.id.message_container);
             iconContainer = (RelativeLayout) view.findViewById(R.id.icon_container);
             view.setOnLongClickListener(this);
         }

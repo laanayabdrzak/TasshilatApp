@@ -1,10 +1,12 @@
 package m2t.com.tashilatappprototype.common.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 
 import m2t.com.tashilatappprototype.R;
 
@@ -13,6 +15,14 @@ import m2t.com.tashilatappprototype.R;
  */
 
 public class Utility {
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);
+    }
 
     public static void replaceFragement(Fragment fragment, FragmentActivity activity) {
         if (fragment != null && !fragment.isVisible()) {

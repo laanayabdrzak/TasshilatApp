@@ -6,13 +6,15 @@
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
+            android:id="@+id/header_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary_darker"
+            android:background="#BEBEBE"
             android:padding="12dp"
             android:orientation="vertical">
             <Spinner
@@ -28,22 +30,28 @@
                 />
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                android:stretchColumns="*">
 
-                <TableRow>
-                    <TextView
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*">
+                    <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
                         android:text="Solde"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:textSize="@dimen/account_title"
+                        android:layout_gravity="left"
+                        android:textAppearance="@style/TextAppearance.title_principal"
                         android:layout_column="1" />
 
-                    <TextView
-                        android:text="12, 000 DHs"
+                    <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
+                        android:id="@+id/solde"
+                        android:text="12, 000 DH"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/account_title"
+                        android:layout_gravity="right"
+                        android:textAppearance="@style/TextAppearance.title_principal"
                         android:layout_column="1" />
 
                 </TableRow>
@@ -51,28 +59,29 @@
                 <TableRow
                     android:layout_width="match_parent">
 
-                    <TextView
+                    <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
                         android:text="Solde a temps réelle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/songs_count"
-                        android:textColor="@color/gray_aero"
+                        android:textAppearance="@style/TextAppearance.title_second"
                         android:layout_marginRight="10dp"
                         android:layout_column="1" />
 
-                    <TextView
-                        android:text="12, 000 DHs"
-                        android:layout_width="match_parent"
+                    <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
+                        android:id="@+id/solde_a_temps_reelle"
+                        android:text="12, 000 DH"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/gray_aero"
-                        android:textSize="@dimen/songs_count"
+                        android:textAppearance="@style/TextAppearance.title_second"
+                        android:gravity="right"
                         android:layout_column="2" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         android:src="@drawable/ic_multiline_chart_black_24dp"
-                        />
+                        android:visibility="gone" />
 
                 </TableRow>
 

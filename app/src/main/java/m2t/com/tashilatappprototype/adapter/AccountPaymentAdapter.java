@@ -65,7 +65,7 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
 
         Merchant acc = merchantListFiltered.get(position);
         holder.title.setText(acc.getName());
-        Log.d("THUMBNLAIII", acc.getThumbnail() + "");
+
         int id = mContext.getResources().getIdentifier("b" + acc.getThumbnail(), "drawable", mContext.getPackageName());
         if (id != 0)
             holder.thumbnail.setImageResource(id);
@@ -73,12 +73,6 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
         // loading acc cover using Glide library
         //Glide.with(mContext).load(acc.getThumbnail()).into(holder.thumbnail);
 
-        holder.overflow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(holder.overflow);
-            }
-        });
         // Delete Process
         final Merchant item = merchantListFiltered.get(position);
 
@@ -217,6 +211,7 @@ public class AccountPaymentAdapter extends RecyclerView.Adapter<AccountPaymentAd
                     return true;
                 default:
             }
+
             return false;
         }
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,40 +15,63 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="centerInside"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/logo" />
 
-    <TextView
-        android:id="@+id/txt_two"
-        android:layout_width="350dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
+        android:paddingStart="@dimen/padding_normal"
+        android:paddingTop="@dimen/padding_dialog"
+        android:paddingEnd="@dimen/padding_dialog"
+        android:paddingBottom="@dimen/padding_normal"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal|bottom"
+        android:elevation="@dimen/z_fab"
+        android:background="@drawable/dialog_background"
+        android:clickable="true"
+        android:transitionName="@string/transition_designer_news_login"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_dialog">
+
+    <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
+        android:id="@+id/auth_via_user_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
         android:gravity="center"
         android:text="S'authentifier"
-        android:textColor="@color/cardview_dark_background"
-        android:typeface="serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:textAppearance="@style/TextAppearance.AccueilTitle" />
 
-    <TextView
-        android:id="@+id/txt_one"
-        android:layout_width="348dp"
-        android:layout_height="80dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+    <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
+        android:id="@+id/auth_via_finger_print"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
         android:gravity="center"
-        android:text="Je suis pas client"
-        android:textColor="@color/cardview_dark_background"
-        android:typeface="serif"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/txt_two"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:text="Touch ID"
+        android:textAppearance="@style/TextAppearance.AccueilTitle" />
 
-</android.support.constraint.ConstraintLayout>
+    <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
+        android:id="@+id/not_client"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
+        android:gravity="center"
+        android:text="Payer des factures"
+        android:textAppearance="@style/TextAppearance.AccueilTitle" />
+
+    </LinearLayout>
+</FrameLayout>

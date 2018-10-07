@@ -54,8 +54,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/thumbnail"
                 android:layout_marginTop="@dimen/ic_account_overflow_margin_top"
+                android:layout_marginRight="@dimen/ic_account_overflow_margin_right"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_dot_24dp" />
+                android:visibility="visible" />
 
         </RelativeLayout>
 

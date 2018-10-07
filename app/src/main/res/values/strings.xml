@@ -8,6 +8,7 @@
     <string name="action_log_out">Se déconnecter</string>
 
     <string name="sign_in">Se connecter</string>
+    <string name="register">Registrer</string>
     <string name="sign_up">S\'inscrire</string>
     <string name="search_title">Rechercher..</string>
     <string name="search_hint">Type name…</string>
@@ -23,15 +24,20 @@
     <string name="accueil_title">Accueil</string>
     <string name="solde_title">Solde</string>
     <string name="depot_title">Dépots</string>
-    <string name="conf_oper_title">Configurer Operateur</string>
+    <string name="conf_oper_title">Operateur</string>
     <string name="facture_title">Facture</string>
     <string name="change_pwd_title">Changer mot de passe</string>
     <string name="gerer_comptes_title">Mes comptes de paiement</string>
     <string name="histo_comptes_title">Hitoriques de mes comptes</string>
-    <string name="paiemnt_fac_title">Paiement factures</string>
+    <string name="services_title">Services</string>
+    <string name="help_title">Help</string>
+    <string name="profil_title">Profil</string>
+    <string name="comptes_title">Comptes</string>
+    <string name="paiemnt_fac_title">Eau &amp; Electricite</string>
+    <string name="impot_taxes_title">Impots &amp; Taxes</string>
     <string name="recharge_title">Recharge</string>
-    <string name="transfert_title">Transfert d\'argent</string>
-    <string name="achat_ticket_billet_title">Achat ticket/billet</string>
+    <string name="transfert_title">Transfert</string>
+    <string name="achat_ticket_billet_title">Transport</string>
     <string name="paiemnt_commercant_title">Paiement commerçant</string>
     <string name="histo_trans_title">Histo des transactions</string>
     <string name="list_facture_title">Liste des factures</string>
@@ -132,6 +138,8 @@
     <string name="key_notifications_new_message_ringtone">key_notifications_new_message_ringtone</string>
     <string name="key_vibrate">key_vibrate</string>
     <string name="key_send_feedback">key_send_feedback</string>
+    <string name="login_failed">Mot de passe erroné</string>
+    <string name="mot_passe_oublie"><u>mot de passe oublié?</u></string>
 
     <!-- Strings related to Settings -->
 
@@ -202,5 +210,9 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="action_settings_headers">Settings with Headers</string>
+
+    <string name="termsetservices">J\'ai lu et j\'accepte les termes et conditions d\'utilisation</string>
+    <string name="get_accounts_permission_primer_message">Autocomplete email addresses</string>
+    <string name="transition_designer_news_login" translatable="false">transition_designer_news_login</string>
 
 </resources>

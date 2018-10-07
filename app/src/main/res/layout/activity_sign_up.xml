@@ -1,122 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fitsSystemWindows="true">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:isScrollContainer="true">
 
-        <ImageView android:src="@drawable/logo_demo"
-            android:layout_width="wrap_content"
-            android:layout_height="72dp"
-            android:layout_marginBottom="24dp"
-            android:layout_gravity="center_horizontal" />
-
-        <!-- Name Label -->
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
+            android:id="@+id/container_sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_name"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingTop="@dimen/padding_dialog"
+            android:paddingEnd="@dimen/padding_dialog"
+            android:paddingBottom="@dimen/padding_dialog"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:paddingLeft="@dimen/padding_normal"
+            android:paddingRight="@dimen/padding_dialog">
+
+            <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
+                android:id="@+id/dialog_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="Name" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginBottom="@dimen/dialog_title_spacing"
+                android:layout_marginLeft="@dimen/spacing_normal"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:gravity="center"
+                android:text="CREER UN COMPTE"
+                android:textAppearance="@style/TextAppearance.DialogTitle" />
 
-        <!-- Address Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_address"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/name_complet_float_label_sign_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPostalAddress"
-                android:hint="Address" />
-        </android.support.design.widget.TextInputLayout>
+                app:hintTextAppearance="@style/TextAppearance.FloatLabelHint"
+                android:layout_marginTop="@dimen/spacing_micro"
+                android:layout_marginStart="@dimen/spacing_micro"
+                android:layout_marginLeft="@dimen/spacing_micro">
 
+                <AutoCompleteTextView
+                    android:id="@+id/name_complet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="nom complet"
+                    android:inputType="text"
+                    android:textColorHighlight="@color/designer_news_link_highlight"
+                    android:selectAllOnFocus="true" />
+            </android.support.design.widget.TextInputLayout>
 
-
-        <!--  Email Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_email"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/mobile_number_float_label_sign_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Email" />
-        </android.support.design.widget.TextInputLayout>
+                app:hintTextAppearance="@style/TextAppearance.FloatLabelHint"
+                android:layout_marginTop="@dimen/spacing_micro"
+                android:layout_marginStart="@dimen/spacing_micro"
+                android:layout_marginLeft="@dimen/spacing_micro">
 
+                <AutoCompleteTextView
+                    android:id="@+id/mobile_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="mobile number"
+                    android:inputType="phone"
+                    android:textColorHighlight="@color/designer_news_link_highlight"
+                    android:selectAllOnFocus="true" />
+            </android.support.design.widget.TextInputLayout>
 
-        <!-- mobile number -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_mobile"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/email_float_label_sign_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Mobile Number" />
-        </android.support.design.widget.TextInputLayout>
+                app:hintTextAppearance="@style/TextAppearance.FloatLabelHint"
+                android:layout_marginTop="@dimen/spacing_micro"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                android:layout_marginStart="@dimen/spacing_micro"
+                android:layout_marginLeft="@dimen/spacing_micro">
 
-        <!-- Password Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_password"
+                <AutoCompleteTextView
+                    android:id="@+id/email_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="email"
+                    android:inputType="textEmailAddress"
+                    android:textColorHighlight="@color/designer_news_link_highlight"
+                    android:selectAllOnFocus="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/password_sign_up_float_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Password"/>
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginStart="@dimen/spacing_micro"
+                android:layout_marginTop="@dimen/spacing_micro"
+                app:passwordToggleEnabled="true"
+                app:hintTextAppearance="@style/TextAppearance.FloatLabelHint"
+                app:passwordToggleDrawable="@drawable/asl_password_visibility"
+                app:passwordToggleTint="?colorControlNormal"
+                android:layout_marginLeft="@dimen/spacing_micro">
 
-        <!-- Password Re-enter Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_reEnterPassword"
+                <m2t.com.tashilatappprototype.ui.widget.PasswordEntry
+                    android:id="@+id/password_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="password"
+                    android:inputType="textPassword"
+                    android:selectAllOnFocus="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/confirm_password_float_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Re-enter Password"/>
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginStart="@dimen/spacing_micro"
+                android:layout_marginTop="@dimen/spacing_micro"
+                app:passwordToggleEnabled="true"
+                app:hintTextAppearance="@style/TextAppearance.FloatLabelHint"
+                app:passwordToggleDrawable="@drawable/asl_password_visibility"
+                app:passwordToggleTint="?colorControlNormal"
+                android:layout_marginLeft="@dimen/spacing_micro">
 
-        <!-- Signup Button -->
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_signup"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:padding="12dp"
-            android:text="Create Account"/>
+                <m2t.com.tashilatappprototype.ui.widget.PasswordEntry
+                    android:id="@+id/password_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="confirm password"
+                    android:inputType="textPassword"
+                    android:selectAllOnFocus="true" />
 
-        <TextView android:id="@+id/link_login"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="Already a member? Login"
-            android:gravity="center"
-            android:textSize="16dip"/>
+            </android.support.design.widget.TextInputLayout>
+            <RelativeLayout
+                android:id="@+id/terms_container_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_normal">
+                <CheckBox
+                    android:id="@+id/permission_agremnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_micro"
+                    android:layout_marginStart="@dimen/spacing_micro"
+                    android:textColor="@color/message"
+                    android:layout_gravity="start"
+                    style="@style/Widget.Plaid.HintTermsCheckBox"
+                    android:layout_marginLeft="@dimen/spacing_normal" />
 
-    </LinearLayout>
-</ScrollView>
+                <m2t.com.tashilatappprototype.ui.widget.BaselineGridTextView
+                    android:id="@+id/terms_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="6dp"
+                    android:layout_toRightOf="@id/permission_agremnt"
+                    android:text="@string/termsetservices"
+                    style="@style/Widget.Plaid.HintTermsCheckBox" />
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/actions_container_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_normal">
+
+                <Button
+                    android:id="@+id/register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:enabled="false"
+                    android:text="@string/register"
+                    android:textAppearance="@style/TextAppearance.DarkButton"
+                    android:onClick="register" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

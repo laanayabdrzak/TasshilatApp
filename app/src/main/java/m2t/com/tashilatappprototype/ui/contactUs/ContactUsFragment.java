@@ -1,20 +1,22 @@
 package m2t.com.tashilatappprototype.ui.contactUs;
 
 
-import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.adapter.ContactUsAdapter;
 import m2t.com.tashilatappprototype.common.pojo.ContactUs;
-import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.ui.MainActivity;
 
 /**
@@ -33,6 +35,15 @@ public class ContactUsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    // newInstance constructor for creating fragment with arguments
+    public static ContactUsFragment newInstance(int page, String title) {
+        ContactUsFragment  fifth = new ContactUsFragment ();
+        Bundle args = new Bundle();
+        args.putInt("someInt", page);
+        args.putString("someTitle", title);
+        fifth.setArguments(args);
+        return fifth;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +51,6 @@ public class ContactUsFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_contact_us, container, false);
         ((MainActivity) getActivity()).enableViews(false);
-        ((MainActivity) getActivity()).setActionBarTitle(R.string.contact_us_title);
 
         pDialog = new ProgressDialog(this.getActivity());
         pDialog.setCancelable(false);
@@ -59,6 +69,21 @@ public class ContactUsFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         prepareAccounts();
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_add).setVisible(false);
+        menu.findItem(R.id.action_log_out).setVisible(true);
+        menu.findItem(R.id.action_favoris).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
     }
 
     private void prepareAccounts() {

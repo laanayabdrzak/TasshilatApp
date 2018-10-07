@@ -1,8 +1,8 @@
 package m2t.com.tashilatappprototype.ui.history;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,18 +22,28 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.adapter.InvoiceAdapter;
 import m2t.com.tashilatappprototype.common.pojo.Invoice;
 import m2t.com.tashilatappprototype.common.utils.DayAxisValueFormatter;
 import m2t.com.tashilatappprototype.common.utils.MyAxisValueFormatter;
 import m2t.com.tashilatappprototype.common.utils.XYMarkerView;
-import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.ui.MainActivity;
 
 public class HistoryFragment extends Fragment {
 
 	private RecyclerView rv;
 	private BarChart mChart;
+
+	// newInstance constructor for creating fragment with arguments
+	public static HistoryFragment newInstance(int page, String title) {
+		HistoryFragment  fifth = new HistoryFragment ();
+		Bundle args = new Bundle();
+		args.putInt("someInt", page);
+		args.putString("someTitle", title);
+		fifth.setArguments(args);
+		return fifth;
+	}
 
 	public HistoryFragment() {
 		super();
@@ -44,9 +54,10 @@ public class HistoryFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_history, container, false);
 		((MainActivity) getActivity()).enableViews(false);
-        if (getArguments().getString("nav").equals("history_accounts"))
+		String str = getArguments().getString("nav");
+        /*if (str != null && str.equals("history_accounts"))
 		    ((MainActivity) getActivity()).setActionBarTitle(R.string.histo_comptes_title);
-        else ((MainActivity) getActivity()).setActionBarTitle(R.string.histo_trans_title);
+        else ((MainActivity) getActivity()).setActionBarTitle(R.string.histo_trans_title);*/
 		rv = (RecyclerView) v.findViewById(R.id.rv);
 
 		mChart = (BarChart) v.findViewById(R.id.chart1);

@@ -2,7 +2,6 @@ package m2t.com.tashilatappprototype.ui.accountsPayment;
 
 
 import android.app.Dialog;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,7 +10,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,29 +24,39 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import m2t.com.tashilatappprototype.adapter.AccountPaymentAdapter;
-import m2t.com.tashilatappprototype.common.pojo.Merchant;
 import m2t.com.tashilatappprototype.R;
+import m2t.com.tashilatappprototype.adapter.AccountPaymentAdapter;
+import m2t.com.tashilatappprototype.adapter.ComptePaymentAdapter;
+import m2t.com.tashilatappprototype.common.pojo.Merchant;
 import m2t.com.tashilatappprototype.ui.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AccountPaymentFragment extends Fragment implements AccountPaymentAdapter.AccountAdapterListener{
+public class AccountPaymentFragment extends Fragment implements ComptePaymentAdapter.AccountAdapterListener{
 
     private RecyclerView recyclerView;
-    private AccountPaymentAdapter adapter;
+    private ComptePaymentAdapter adapter;
     private List<Merchant> accountsList;
     private Dialog dialog;
+
     public AccountPaymentFragment() {
         // Required empty public constructor
     }
 
+    // newInstance constructor for creating fragment with arguments
+    public static AccountPaymentFragment newInstance(int page, String title) {
+        AccountPaymentFragment fifth = new AccountPaymentFragment ();
+        Bundle args = new Bundle();
+        args.putInt("someInt", page);
+        args.putString("someTitle", title);
+        fifth.setArguments(args);
+        return fifth;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +69,6 @@ public class AccountPaymentFragment extends Fragment implements AccountPaymentAd
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_account_payment, container, false);
         ((MainActivity) getActivity()).enableViews(false);
-        ((MainActivity) getActivity()).setActionBarTitle(R.string.gerer_comptes_title);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         accountsList = new ArrayList<>();
         setUpRecyclerView();
@@ -71,8 +81,8 @@ public class AccountPaymentFragment extends Fragment implements AccountPaymentAd
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_add).setVisible(true);
-        menu.findItem(R.id.action_log_out).setVisible(false);
-        menu.findItem(R.id.action_settings).setVisible(false);
+        menu.findItem(R.id.action_log_out).setVisible(true);
+        menu.findItem(R.id.action_favoris).setVisible(false);
         super.onPrepareOptionsMenu(menu);
     }
 
@@ -84,14 +94,15 @@ public class AccountPaymentFragment extends Fragment implements AccountPaymentAd
             case R.id.action_add:
                 showMyDialog(getActivity());
                 break;
-
+            case R.id.action_favoris:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void setUpRecyclerView() {
 
-        adapter = new AccountPaymentAdapter(this.getActivity(), accountsList, this);
+        adapter = new ComptePaymentAdapter(this.getActivity(), accountsList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -139,8 +150,8 @@ public class AccountPaymentFragment extends Fragment implements AccountPaymentAd
 
 
 
-        Button btnAdd = (Button) dialog.findViewById(R.id.btnAdd);
-        Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
+        AppCompatButton btnAdd = (AppCompatButton) dialog.findViewById(R.id.btnAdd);
+        AppCompatButton btnCancel = (AppCompatButton) dialog.findViewById(R.id.btnCancel);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +174,7 @@ public class AccountPaymentFragment extends Fragment implements AccountPaymentAd
          */
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int dialogWidth = (int)(displayMetrics.widthPixels * 0.95);
-        int dialogHeight = (int)(displayMetrics.heightPixels * 0.75);
+        int dialogHeight = (int)(displayMetrics.heightPixels * 0.65);
         dialog.getWindow().setLayout(dialogWidth, dialogHeight);
 
         dialog.show();

@@ -1,9 +1,9 @@
 package m2t.com.tashilatappprototype.ui.listFacturies;
 
 
-import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,6 @@ import java.util.List;
 
 import m2t.com.tashilatappprototype.R;
 import m2t.com.tashilatappprototype.adapter.FacturesAdapter;
-import m2t.com.tashilatappprototype.adapter.util.DividerItemDecoration;
 import m2t.com.tashilatappprototype.common.pojo.EncaisseRequest;
 import m2t.com.tashilatappprototype.common.pojo.EncaisseResponse;
 import m2t.com.tashilatappprototype.common.pojo.Facture;
@@ -66,8 +66,10 @@ public class ListFacturiesFragment extends Fragment implements FacturesAdapter.F
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_list_facturies, container, false);
         ((MainActivity) getActivity()).enableViews(false);
-        ((MainActivity) getActivity()).setActionBarTitle(R.string.list_facture_title);
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setHasOptionsMenu(true);
+        ((MainActivity) getActivity()).setActionBarTitle(R.string.list_facture_title, R.color.secondColor);
+        recyclerView = rootView.findViewById(R.id.recycler_view);
         factureList = new ArrayList<>();
         sessionManager = new SessionManager(getActivity().getApplicationContext());
 
@@ -75,53 +77,40 @@ public class ListFacturiesFragment extends Fragment implements FacturesAdapter.F
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), LinearLayoutManager.VERTICAL));
+        //recyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(mAdapter);
 
         actionModeCallback = new ActionModeCallback();
-        /* adapter = new FactureAdapter(this.getActivity(), factureList);
 
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(adapter);
-        */
         getDataintoRecycler();
+
+        ((MainActivity) getActivity()).toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getFragmentManager().getBackStackEntryCount() == 0) {
+                    getActivity().onBackPressed();
+                } else {
+                    getFragmentManager().popBackStack();
+                }
+            }
+        });
 
         return rootView;
     }
 
-    private void prepareData() {
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.main, menu);
+    }
 
-        Facture f1 = new Facture();
-        f1.setAdresse("111");
-        f1.setMntFraisHt("111");
-        f1.setDateLimite("111");
-        f1.setEcheance("03.93.99");
-        factureList.add(f1);
-
-        Facture f2 = new Facture();
-        f2.setAdresse("222");
-        f2.setMntFraisHt("222");
-        f2.setDateLimite("222");
-        f2.setEcheance("222");
-        factureList.add(f2);
-
-        Facture f3 = new Facture();
-        f3.setAdresse("333");
-        f3.setMntFraisHt("333");
-        f3.setDateLimite("333");
-        f3.setEcheance("333");
-        factureList.add(f3);
-
-        Facture f4 = new Facture();
-        f4.setAdresse("444");
-        f4.setMntFraisHt("444");
-        f4.setDateLimite("444");
-        f4.setEcheance("444");
-        factureList.add(f4);
-
-        mAdapter.notifyDataSetChanged();
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_add).setVisible(false);
+        menu.findItem(R.id.action_log_out).setVisible(true);
+        menu.findItem(R.id.action_favoris).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
     }
 
     private void getDataintoRecycler() {
@@ -138,7 +127,8 @@ public class ListFacturiesFragment extends Fragment implements FacturesAdapter.F
 
     @Override
     public void onIconClicked(int position) {
-        Toast.makeText(getActivity(), "IconClicked " + position, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), "IconClicked " + position, Toast.LENGTH_LONG).show();
+        popInPayment(position);
     }
 
     @Override
@@ -148,6 +138,10 @@ public class ListFacturiesFragment extends Fragment implements FacturesAdapter.F
 
     @Override
     public void onFactureRowClicked(final int position) {
+
+    }
+
+    private void popInPayment(final int position) {
         String webData = "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<body>\n" +
